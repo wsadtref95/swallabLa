@@ -18,7 +18,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    // 登录方法
+   
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -34,12 +34,12 @@ class AuthController extends Controller
             if ($user->role == 'admin') {
                 return redirect('/admin');
             } else {
-                return redirect('/member');
+                return redirect('headpage/headpage');
             }
         }
 
         return back()->withErrors([
-            'email' => __('auth.failed'), // 使用 auth 语言包中的错误消息
+            'email' => __('auth.failed'), 
         ])->onlyInput('email');
     }
 
@@ -60,7 +60,7 @@ class AuthController extends Controller
             'role' => $request->role,
         ]);
 
-        Auth::login($user); // 自动登录
+        Auth::login($user); 
 
         if ($user->role == 'admin') {
             return redirect('/admin');

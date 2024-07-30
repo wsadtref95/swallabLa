@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\IsAdmin;
@@ -15,7 +14,7 @@ Route::get('/', function () {
 Route::view('/register', 'auth.register');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::view('/login', 'auth.login');
-Route::get('/forgot-password', function () {
+Route::get('/forgot-password', function() {
     return view('auth.forgot-password');
 });
 Route::get('/reset-password/{token}', function ($token) {
@@ -35,9 +34,12 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::middleware([IsMember::class])->group(function () {
+        Route::get('/headpage/headpage', function () {
+            return view('headpage.headpage');
+        })->name('headpage');
+
         Route::get('/profile', function () {
             $user = Auth::user();
-            dd($user); // 调试信息，检查用户数据
             return view('login.profile', compact('user'));
         })->name('profile.show');
     });
@@ -47,4 +49,4 @@ Route::middleware(['auth'])->group(function () {
 Route::resource('/food_items', FoodItemController::class);
 
 // ========================個人頁面login==================
-Route::view('/login/profile', 'login.profile');
+Route::view('/login/profile','login.profile');
