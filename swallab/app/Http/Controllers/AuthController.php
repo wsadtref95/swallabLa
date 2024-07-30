@@ -51,13 +51,6 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|in:admin,member',
-        ], [
-            'name.required' => '名称是必需的。',
-            'email.required' => '电子邮件地址是必需的。',
-            'email.unique' => '这个电子邮件地址已经被使用。',
-            'password.required' => '密码是必需的。',
-            'password.confirmed' => '密码确认不匹配。',
-            'role.required' => '角色是必需的。',
         ]);
 
         $user = User::create([
@@ -86,7 +79,7 @@ class AuthController extends Controller
         );
 
         return $status === Password::RESET_LINK_SENT
-            ? back()->with('status', '密码重设链接已发送至您的邮箱。')
+            ? back()->with('status', '密碼重設連結已送到信箱。')
             : back()->withErrors(['email' => __($status)]);
     }
 

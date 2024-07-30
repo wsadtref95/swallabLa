@@ -27,7 +27,7 @@
             <div class="col-md-6">
                 <div class="card card-custom">
                     <div class="card-header">
-                        <h2>Forgot Password</h2>
+                        <h2>忘記密碼</h2>
                     </div>
                     <div class="card-body">
                         @if (session('status'))
@@ -38,10 +38,10 @@
                         <form method="POST" action="{{ url('/forgot-password') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="email">Email address</label>
+                                <label for="email">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" required>
                             </div>
-                            <button type="submit" class="btn btn-custom mt-3">Send Reset Link</button>
+                            <button type="submit" class="btn btn-custom mt-3">寄送連結</button>
                         </form>
                     </div>
                 </div>
