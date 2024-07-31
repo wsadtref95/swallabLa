@@ -55,6 +55,7 @@
                                 <input type="password" class="form-control" id="password" name="password" required>
                             </div>
                             <button type="submit" class="btn btn-custom mt-3">登入</button>
+                            <a href="{{ url('/register') }}" class="btn btn-link mt-3">加入會員</a>
                             <a href="{{ url('/forgot-password') }}" class="btn btn-link mt-3">忘記密碼?</a>
                         </form>
                     </div>

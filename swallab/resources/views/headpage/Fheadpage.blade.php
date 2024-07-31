@@ -1,3 +1,5 @@
+<!-- resources/views/headpage/headpage.blade.php -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +25,8 @@
         <div class="container">
             <!-- LOGO -->
             <a class="navbar-brand ms-5 col-1" href="{{ route('headpage') }}">
-                <img src="{{ asset('images/root/logo.jpg') }}" alt="" class="logo d-inline-block align-text-top">
+                <img src="{{ asset('images/root/logo.jpg') }}" alt=""
+                    class="logo d-inline-block align-text-top">
             </a>
             <!-- 伸縮 -->
             <div class="collapse navbar-collapse col-10" id="navbarSupportedContent">
@@ -39,7 +42,7 @@
                 <form class="ms-2 me-1 w-100" role="search" name="search">
                     <div class="d-flex" style="width: 100%;">
                         {{-- class="theicon" --}}
-                        <div id="theicon" class="mt-2 me-0 align-items-center justify-content-center">
+                        <div id="theicon" class=" mt-2 me-0 align-items-center justify-content-center">
                             {{-- <div id="popup"
                                 class="popup row text-center d-flex align-items-center justify-content-center">
                                 <p><i id="showicon" class=""></i></p>
@@ -83,8 +86,10 @@
                                             class="position-relative">不挑地區</a>
                                         <a href="#loc_Taichung" onclick="fillInput2('台中市')"
                                             class="position-relative">台中市</a>
-                                        <a href="#loc_1" onclick="fillInput2('選項2')" class="position-relative">選項2</a>
-                                        <a href="#loc_2" onclick="fillInput2('選項3')" class="position-relative">選項3</a>
+                                        <a href="#loc_1" onclick="fillInput2('選項2')"
+                                            class="position-relative">選項2</a>
+                                        <a href="#loc_2" onclick="fillInput2('選項3')"
+                                            class="position-relative">選項3</a>
                                     </div>
                                 </div>
                             </div>
@@ -99,15 +104,18 @@
                             </button>
                             <button class="position-absolute translate-middle rounded-pill filter_btn"
                                 style="margin-left: 50%;">
-                                <img class="icon" src="{{ asset('images/nav_icon/confetti.png') }}" alt="">慶生
+                                <img class="icon" src="{{ asset('images/nav_icon/confetti.png') }}"
+                                    alt="">慶生
                             </button>
                             <button class="position-absolute translate-middle rounded-pill filter_btn"
                                 style="margin-left: 70%;">
-                                <img class="icon" src="{{ asset('images/nav_icon/handshake.png') }}" alt="">商務
+                                <img class="icon" src="{{ asset('images/nav_icon/handshake.png') }}"
+                                    alt="">商務
                             </button>
                             <button class="position-absolute translate-middle rounded-pill filter_btn"
                                 style="margin-left: 90%;">
-                                <img class="icon" src="{{ asset('images/nav_icon/disabled-people.png') }}" alt="">無障礙
+                                <img class="icon" src="{{ asset('images/nav_icon/disabled-people.png') }}"
+                                    alt="">無障礙
                             </button>
                         </div>
                         <input type="image" src="{{ asset('images/nav_icon/loupe.png') }}" class="icon mt-2 ms-0"
@@ -116,15 +124,10 @@
                 </form>
                 <!-- 登入及註冊按鈕 -->
                 <div class="ms-3 me-5 col-1">
-                    @if (Auth::check())
-                        <a href="{{ route('profile.show') }}" class="text-decoration-none">
-                            <span>{{ Auth::user()->name }}</span>
-                        </a>
-                    @else
-                        <a href="{{ route('login') }}">
-                            <button class="btn btn-sm btnLogin text-nowrap">登入/註冊</button>
-                        </a>
-                    @endif
+
+                    <a href="{{ url('/login') }}">
+                        <button class="btn btn-sm btnLogin text-nowrap">登入/註冊</button>
+                    </a>
                 </div>
             </div>
         </div>

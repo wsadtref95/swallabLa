@@ -5,7 +5,7 @@ use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsMember;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FoodItemController;
-
+use App\Http\Controllers\ProfileController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -13,6 +13,7 @@ Route::get('/', function () {
 // =============================登入路徑=================================
 Route::view('/register', 'auth.register');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 Route::view('/login', 'auth.login');
 Route::get('/forgot-password', function() {
     return view('auth.forgot-password');
@@ -42,6 +43,8 @@ Route::middleware(['auth'])->group(function () {
             $user = Auth::user();
             return view('login.profile', compact('user'));
         })->name('profile.show');
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::post('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
     });
 });
 
@@ -50,3 +53,5 @@ Route::resource('/food_items', FoodItemController::class);
 
 // ========================個人頁面login==================
 Route::view('/login/profile','login.profile');
+
+Route::view('/headpage/Fheadpage','headpage/Fheadpage');

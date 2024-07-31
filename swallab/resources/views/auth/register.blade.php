@@ -70,6 +70,7 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-custom mt-3">註冊</button>
+                        <a href="{{ url('/login') }}" class="btn btn-link mt-3">已經是會員了</a>
                     </form>
                 </div>
             </div>
