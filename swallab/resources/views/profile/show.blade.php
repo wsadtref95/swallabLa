@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="{{ asset('css/profilexi.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .email {
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -42,13 +47,13 @@
                         <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('image/大專logo.png') }}"  style="width: 180px; height: auto;"> 
                         <div class="col-md-5 ml-5 ">
                             <div class="name">{{ $user->name }}</div>
-                            <div class="icon">
+                            <div class="email">
+                                {{ $user->email }}
+                            </div>
+                            <div class="icon mt-2">
                                 <i class="fa-brands fa-instagram me-2 ms-2"></i>
                                 <i class="fa-brands fa-facebook me-2 ms-2"></i>
                                 <i class="fa-brands fa-threads me-2 ms-2"></i>
-                            </div>
-                            <div class="email">
-                                {{ $user->email }}
                             </div>
                         </div>
                         <div class="col-md-7 ml-5 ">  

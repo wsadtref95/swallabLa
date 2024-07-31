@@ -66,9 +66,7 @@
                 </div>
                 <button class="delete ml-5">完成編輯</button>
                 <hr>
-                <button class="ml-5 delete" data-toggle="modal" data-target="#addCreditCardModal">
-                    新增信用卡
-                </button>
+
             </div>
         </div>
     </div>
@@ -105,41 +103,7 @@
         </div>
     </div>
     <!-- 新增信用卡model -->
-    <div class="modal fade" id="addCreditCardModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addCreditCardModalLabel">新增信用卡</h5>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span>x</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label>信用卡號碼</label>
-                            <input type="text" class="form-control" placeholder="1234 5678 9012 3456">
-                        </div>
-                        <div class="form-group">
-                            <label>到期日</label>
-                            <input type="text" class="form-control" placeholder="MM/YY">
-                        </div>
-                        <div class="form-group">
-                            <label>安全碼</label>
-                            <input type="text" class="form-control" placeholder="123">
-                        </div>
-                        <div class="form-group">
-                            <label>持卡人姓名</label>
-                            <input type="text" class="form-control" placeholder="王小明">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">儲存</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <footer>
         <div class="container-md">
             <div class="row">
