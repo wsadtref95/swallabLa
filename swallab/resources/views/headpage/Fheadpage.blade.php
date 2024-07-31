@@ -32,10 +32,10 @@
             <div class="collapse navbar-collapse col-10" id="navbarSupportedContent">
                 <div class="nav ms-0 me-3 row">
                     <div class="nav-item col-6">
-                        <a class="nav-link d-block nav_mainbtn" href="#">找餐廳</a>
+                        <a class="nav-link d-block nav_mainbtn" href="{{ url('/restaurant/detail') }}">找餐廳</a>
                     </div>
                     <div class="nav-item col-6">
-                        <a class="nav-link d-block nav_mainbtn" href="#">看食記</a>
+                        <a class="nav-link d-block nav_mainbtn" href="{{ url('/foodNotes/foodNotes') }}">看食記</a>
                     </div>
                 </div>
                 <!-- Input 都在這 -->

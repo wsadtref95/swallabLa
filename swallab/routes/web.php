@@ -48,10 +48,34 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::post('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
+
 // ========================後台模擬=============================
 Route::resource('/food_items', FoodItemController::class);
 
 // ========================個人頁面login==================
 Route::view('/login/profile','login.profile');
 
+Route::view('/login/profile/Fedit','login/Fedit');
+
+Route::view('/login/profile/order','login/order');
+// =========================首頁(非會員)=============================
 Route::view('/headpage/Fheadpage','headpage/Fheadpage');
+
+
+
+// =============================餐廳(非會員)==================================
+Route::view('/restaurant/detail','restaurant/detail');
+
+
+// ===============================FoodNotes==========================================
+
+Route::view('/foodNotes/foodNotes','foodNotes/foodNotes');
+
+
+
+// =================================myHistory========================================
+
+Route::view('/myHistory/myOrder','myHistory/myOrder');

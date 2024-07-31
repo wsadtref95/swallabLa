@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    // 显示登录表单
+
     public function showLoginForm()
     {
         return view('auth.login');
@@ -43,7 +43,7 @@ class AuthController extends Controller
         ])->onlyInput('email');
     }
 
-    // 注册方法
+
     public function register(Request $request)
     {
         $request->validate([
@@ -65,11 +65,11 @@ class AuthController extends Controller
         if ($user->role == 'admin') {
             return redirect('/admin');
         } else {
-            return redirect('/member');
+            return redirect('/headpage/headpage');
         }
     }
 
-    // 忘记密码方法
+    
     public function forgotPassword(Request $request)
     {
         $request->validate(['email' => 'required|email']);
@@ -83,7 +83,7 @@ class AuthController extends Controller
             : back()->withErrors(['email' => __($status)]);
     }
 
-    // 重置密码方法
+
     public function resetPassword(Request $request)
     {
         $request->validate([
@@ -118,7 +118,7 @@ class AuthController extends Controller
         }
     }
 
-    // 退出登录方法
+   
     public function logout(Request $request)
     {
         Auth::logout();

@@ -29,7 +29,7 @@
                 <a href="{{ route('profile.show') }}" class="active">
                     <p>個人檔案</p>
                 </a>
-                <a href="#">
+                <a href="{{url('/login/profile/order')}}">
                     <p>我的訂單</p>
                 </a>
                 <a href="#">
@@ -60,7 +60,7 @@
                             <div class="col-md-7 ml-5 ">
                                 <div class="follow">30 追蹤中 20 粉絲</div>
                                 <div class="col-md-8">
-                                    <a href="#">
+                                    <a href="{{ url('/login/profile/Fedit') }}">
                                         <button class="edit btn-outline-primary">編輯個人檔案</button>
                                     </a>
                                 </div>
