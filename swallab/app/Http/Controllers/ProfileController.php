@@ -31,7 +31,7 @@ class ProfileController extends Controller
             $avatarPath = $request->file('avatar')->store('avatars', 'public');
             $data['avatar'] = $avatarPath;
 
-            // 删除旧头像文件
+          
             if ($user->avatar) {
                 Storage::disk('public')->delete($user->avatar);
             }

@@ -30,7 +30,7 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 Route::middleware(['auth'])->group(function () {
     Route::middleware([IsAdmin::class])->group(function () {
         Route::get('/admin', function () {
-            return view('admin.dashboard');
+            return view('/backstage/new_oder');
         });
     });
 
@@ -43,14 +43,13 @@ Route::middleware(['auth'])->group(function () {
             $user = Auth::user();
             return view('login.profile', compact('user'));
         })->name('profile.show');
+        Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::post('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
     });
 });
 
-Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
-Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::post('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
+
 
 // ========================後台模擬=============================
 Route::resource('/food_items', FoodItemController::class);
@@ -79,3 +78,15 @@ Route::view('/foodNotes/foodNotes','foodNotes/foodNotes');
 // =================================myHistory========================================
 
 Route::view('/myHistory/myOrder','myHistory/myOrder');
+
+
+// ===============================後台===============================
+
+Route::view('/backstage/management_menu1','backstage/management_menu1');
+Route::view('/backstage/management_menu2','backstage/management_menu2');
+Route::view('/backstage/new_oder','backstage/new_oder');
+Route::view('/backstage/ready_to_serve','backstage/ready_to_serve');
+Route::view('/backstage/set_info','backstage/set_info');
+Route::view('/backstage/set_time','backstage/set_time');
+
+// =============================================================================

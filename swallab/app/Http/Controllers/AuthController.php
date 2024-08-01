@@ -27,6 +27,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+            //當使用者成功登入後，會執行 $request->session()->regenerate();  將舊會話 ID（例如 abc123）中的所有會話數據（如使用者資訊、購物車內容等）轉移到新的會話 ID 中。
             $request->session()->regenerate();
 
             $user = Auth::user();
@@ -58,6 +59,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
+            'avatar' => 'avatars/profile.jpg',
         ]);
 
         Auth::login($user); 
@@ -102,7 +104,7 @@ class AuthController extends Controller
                 $user->setRememberToken(Str::random(60));
 
                 event(new PasswordReset($user));
-                Auth::login($user); // 自动登录用户
+                Auth::login($user);
             }
         );
 

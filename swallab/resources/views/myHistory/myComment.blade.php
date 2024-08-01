@@ -19,7 +19,7 @@
         <div class="container-fluid">
             <!-- LOGO -->
             <a class="navbar-brand ms-5" href="#">
-                <img src="../images/root/LOGO.jpg" alt="" class="logo d-inline-block align-text-top">
+                <img src="{{ asset('/images/other/logo.jpg') }}" alt="" class="logo d-inline-block align-text-top">
             </a>
             <!-- 伸縮 -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
