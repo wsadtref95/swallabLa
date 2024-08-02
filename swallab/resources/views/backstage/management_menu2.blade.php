@@ -11,11 +11,16 @@
     <link rel="stylesheet" href="../css/backstage.css">
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/root.css">
-    <script scr="../js/nav.js"></script>
+    <script src="../js/nav.js"></script>
     <title>Management Menu</title>
+    <style>
+        #aa {
+            background-image: url('{{ asset('images/other/subtle_white_feathers.webp') }}');
+        }
+    </style>
 </head>
 
-<body>
+<body id="aa">
     <!-- NAV_begin : sticky-top -->
     <nav class="navbar navbar-expand sticky-top shadow">
         <div class="container">
@@ -23,13 +28,13 @@
             <a class="navbar-brand ms-5 col-1" href="../headpage/headpage.html">
                 <img src="../images/root/logo.jpg" alt="" class="logo d-inline-block align-text-top">
             </a>
-            
+
             <div class="ms-3 me-5 col-1">
                 <a href="#" class="">
                     @if (Auth::check())
-                        <h2 href="{{ route('profile.show') }}" class="text-decoration-none">
+                        <h5 href="{{ route('profile.show') }}" class="text-decoration-none">
                             <span>{{ Auth::user()->name }}</span>
-                        </h2>
+                        </h5>
                     @else
                         <a href="{{ route('login') }}">
                             <button class="btn btn-sm btnLogin text-nowrap">登入/註冊</button>
@@ -41,7 +46,6 @@
     </nav>
     <!-- NAV_end -->
     <div class="container">
-
         <div class="row">
             <div class="mySidebar col-2">
                 <a href="{{ url('/backstage/new_oder') }}" class="active">
@@ -79,77 +83,52 @@
                     <div id="menuList"></div>
                 </div>
 
-
                 <!-- 新增菜單 module -->
-
-                <div class="addOptionContainerBg d-none" id="newForm">
-                    <!-- <div class="addOptionContainerBg" id="newForm"> -->
-
-                    <!-- <form action="" method="post" enctype="multipart/form-data" id="editForm"> -->
-                    <form id="editForm" enctype="multipart/form-data">
-                        <i id="myClose" class="fa-solid fa-xmark"></i>
-                        <div class="addOptionContainer row container">
-                            <div class="col">
-                                <p id="photoResult">新增食品照片</p>
-                                <!-- <p id="photoResult">
-                                    <img src="../images/background.webp" alt="">
-                                </p> -->
-                                <input type="file" name="foodPhoto" id="foodPhoto" accept="image/*">
+                <form id="editForm" enctype="multipart/form-data">
+                    @csrf
+                    <i id="myClose" class="fa-solid fa-xmark"></i>
+                    <div class="addOptionContainer row container">
+                        <div class="col">
+                            <p id="photoResult">新增食品照片</p>
+                            <input type="file" name="foodPhoto" id="foodPhoto" accept="image/*" required>
+                        </div>
+                        <div class="col row">
+                            <div class="col-12">
+                                <h5>
+                                    <label for="foodPrice">價&emsp;&emsp;格 : &emsp;&emsp;</label>
+                                </h5>
+                                <input type="number" name="foodPrice" id="foodPrice" required>
                             </div>
-                            <div class="col row">
+                            <div class="col-12">
+                                <h5>
+                                    <label for="foodName">名&emsp;&emsp;稱 : &emsp;&emsp;</label>
+                                </h5>
+                                <input name="foodName" id="foodName" required>
+                            </div>
+                            <div class="col-12">
+                                <h5>
+                                    <label for="classification">餐點分類 : &emsp;&emsp;</label>
+                                </h5>
 
-                                <div class="col-12">
-                                    <h5>
-                                        <label for="foodPrice">價&emsp;&emsp;格 : &emsp;&emsp;</label>
-                                    </h5>
-                                    <input type="number" name="foodPrice" id="foodPrice">
-                                </div>
-                                <div class="col-12">
-                                    <h5>
-                                        <label for="foodName">名&emsp;&emsp;稱 : &emsp;&emsp;</label>
-                                    </h5>
-                                    <input name="foodName" id="foodName">
-                                </div>
-                                <div class="col-12">
-                                    <h5>
-                                        <label for="classification">餐點分類 : &emsp;&emsp;</label>
-                                    </h5>
-                                    <select name="classification" id="classification">
-                                        <option value="" disabled selected>請選擇...(動態)</option>
-                                    </select>
-                                </div>
-                                <div class="col-12">
-                                    <h5>
-                                        <label for="addClass">新增分類 : &emsp;&emsp;</label>
-                                    </h5>
-                                    <input id="addClass" name="addClass">
-                                </div>
                             </div>
                         </div>
-                        <div class="discountBtn">
-                            <span id="submitResult"></span>
-                            <input type="submit" value="存檔" id="addMenuBtn">
-                        </div>
-                    </form>
-
-                </div>
+                    </div>
+                    <div class="discountBtn">
+                        <span id="submitResult"></span>
+                        <input type="submit" value="存檔" id="addMenuBtn">
+                    </div>
+                </form>
+                
                 <!-- 編輯/修改菜單 -->
                 <div class="addOptionContainerBg d-none" id="modifyFormCon">
-                    <!-- <div class="addOptionContainerBg" id="newForm"> -->
-
-                    <!-- <form action="" method="post" enctype="multipart/form-data" id="editForm"> -->
-                    <form id="modifyForm" enctype="multipart/form-data">
+                    <form id="modifyForm" enctype="multipart/form-data" onsubmit="handleModifyFormSubmit(event)">
                         <i id="myClose2" class="fa-solid fa-xmark"></i>
                         <div class="addOptionContainer row container">
                             <div class="col">
                                 <p id="myPhotoResult"></p>
-                                <!-- <p id="photoResult">
-                                    <img src="../images/background.webp" alt="">
-                                </p> -->
                                 <input type="file" name="myFoodPhoto" id="myFoodPhoto" accept="image/*">
                             </div>
                             <div class="col row">
-
                                 <div class="col-12">
                                     <h5>
                                         <label for="myFoodPrice">價&emsp;&emsp;格 : &emsp;&emsp;</label>
@@ -169,13 +148,10 @@
                             <input type="submit" value="存檔" id="modifyMenuBtn">
                         </div>
                     </form>
-
                 </div>
                 <!-- 刪除菜單 -->
                 <div class="addOptionContainerBg d-none" id="deleteFormCon">
-                <!-- <div class="addOptionContainerBg" id="deleteFormCon"> -->
-                    
-                    <form id="deleteForm" enctype="multipart/form-data">
+                    <form id="deleteForm" enctype="multipart/form-data" onsubmit="handleDeleteFormSubmit(event)">
                         <i id="myClose3" class="fa-solid fa-xmark"></i>
                         <div class="addOptionContainer row">
                             <div class="col colBtn">取消</div>
@@ -185,16 +161,11 @@
                             <span id="deleteResult"></span>
                         </div>
                     </form>
-
                 </div>
-
-
             </div>
         </div>
     </div>
     <script src="../js/jquery-3.7.1.js"></script>
-    <!-- <script src="../js/backstage.js"></script> -->
     <script src="../js/management2.js"></script>
 </body>
-
 </html>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsMember;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\FoodItemController;
 use App\Http\Controllers\ProfileController;
 Route::get('/', function () {
@@ -84,9 +85,13 @@ Route::view('/myHistory/myOrder','myHistory/myOrder');
 
 Route::view('/backstage/management_menu1','backstage/management_menu1');
 Route::view('/backstage/management_menu2','backstage/management_menu2');
+Route::post('/backstage/management_menu1/store', [MenuController::class, 'store'])->name('menu.store');
 Route::view('/backstage/new_oder','backstage/new_oder');
 Route::view('/backstage/ready_to_serve','backstage/ready_to_serve');
 Route::view('/backstage/set_info','backstage/set_info');
 Route::view('/backstage/set_time','backstage/set_time');
 
-// =============================================================================
+// ==============================後台test===========================================
+Route::view('/backstagetest/test','backstagetest/test');
+Route::post('/menu/store', [MenuController::class, 'store'])->name('menu.store');
+Route::get('/restaurant/detail', [MenuController::class, 'index'])->name('restaurant.detail');

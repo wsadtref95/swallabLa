@@ -17,6 +17,6 @@ class IsAdmin
         }
 
         Log::warning('User is not admin or not authenticated');
-        return redirect('/backstage/new_oder');
+        return redirect('/backstagetest/test');
     }
 }

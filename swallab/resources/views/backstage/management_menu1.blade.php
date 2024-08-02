@@ -13,9 +13,15 @@
     <link rel="stylesheet" href="../css/root.css">
     <script scr="../js/nav.js"></script>
     <title>Management Menu</title>
+    <style>
+        #aa {
+            background-image: url('{{ asset('images/other/subtle_white_feathers.webp') }}');
+
+        }
+    </style>
 </head>
 
-<body>
+<body id="aa">
     <!-- NAV_begin : sticky-top -->
     <nav class="navbar navbar-expand sticky-top shadow">
         <div class="container">
@@ -27,9 +33,9 @@
             <div class="ms-3 me-5 col-1">
                 <a href="#" class="">
                     @if (Auth::check())
-                        <h2 href="{{ route('profile.show') }}" class="text-decoration-none">
+                        <h5 href="{{ route('profile.show') }}" class="text-decoration-none">
                             <span>{{ Auth::user()->name }}</span>
-                        </h2>
+                        </h5>
                     @else
                         <p href="{{ route('login') }}">
                             <button class="btn btn-sm btnLogin text-nowrap">登入/註冊</button>
