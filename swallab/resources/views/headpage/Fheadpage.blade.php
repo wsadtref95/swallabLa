@@ -32,10 +32,10 @@
             <div class="collapse navbar-collapse col-10" id="navbarSupportedContent">
                 <div class="nav ms-0 me-3 row">
                     <div class="nav-item col-6">
-                        <a class="nav-link d-block nav_mainbtn" href="{{ url('/restaurant/detail') }}">找餐廳</a>
+                        <a class="nav-link d-block nav_mainbtn" href="{{ url('/login') }}">找餐廳</a>
                     </div>
                     <div class="nav-item col-6">
-                        <a class="nav-link d-block nav_mainbtn" href="{{ url('/foodNotes/foodNotes') }}">看食記</a>
+                        <a class="nav-link d-block nav_mainbtn" href="{{ url('/login') }}">看食記</a>
                     </div>
                 </div>
                 <!-- Input 都在這 -->
@@ -136,11 +136,11 @@
 
     <!-- Main_begin -->
     <main>
-        <div class="w-100 container-fluid" style="flex:1">
+        <div class="w-100 container-fluid d-flex flex-column align-items-center" style="flex:1">
             <!-- 品牌介紹 -->
-            <div class="bg-primary row align-self-center">
+            <div class="bg-primary row align-self-center w-100">
                 <div class="fs-1 fw-bold text-center my-4">Swallab</div>
-                <article class="bg-danger text-center">
+                <article class="bg-danger text-center w-100">
                     <span>
                         吃，除了吃飽，可以吃好，還可以吃得巧妙<br>
                         吃可以是日常生活的一個小實驗<br>
@@ -151,27 +151,23 @@
                 </article>
             </div>
             <!-- 大門二欄 -->
-            <div class="row justify-content-evenly">
-                <div class="col-5 d-flex flex-column justify-content-center mt-3" style="overflow: hidden;">
-                    <div id="mainImageRest">
-                        <button href="#" class="">
-                            <img src="{{ asset('images/headpage_mainphoto/main_rest.jpeg') }}" alt=""
-                                style="position: relative; left: 0%;">
-                        </button>
+            <div class="row justify-content-center w-100 mt-3">
+                <div class="col-md-5 d-flex flex-column align-items-center justify-content-center mt-3">
+                    <div id="mainImageRest" class="mb-3">
+                        <img src="{{ asset('images/headpage_mainphoto/main_rest.jpeg') }}" alt="找餐廳"
+                            class="img-fluid">
                     </div>
-                    <div class="row justify-content-center" id="btnRest">
-                        <a href="#" class="btn btn-outline-danger text-center mt-3 w-50">找餐廳</a>
+                    <div class="row justify-content-center w-100" id="btnRest">
+                        <a href="#" class="btn btn-outline-danger text-center w-50">找餐廳</a>
                     </div>
                 </div>
-                <div class="col-5 d-flex flex-column justify-content-center mt-3" style="overflow: hidden;">
-                    <div id="mainImageNotes">
-                        <button href="#" class="">
-                            <img src="{{ asset('images/headpage_mainphoto/main_notes.jpeg') }}" alt=""
-                                style="position: relative; left: -60%;">
-                        </button>
+                <div class="col-md-5 d-flex flex-column align-items-center justify-content-center mt-3">
+                    <div id="mainImageNotes" class="mb-3">
+                        <img src="{{ asset('images/headpage_mainphoto/main_notes.jpeg') }}" alt="看食記"
+                            class="img-fluid">
                     </div>
-                    <div class="row justify-content-center" id="btnNotes">
-                        <a href="#" class="btn btn-outline-danger text-center mt-3 w-50">看食記</a>
+                    <div class="row justify-content-center w-100" id="btnNotes">
+                        <a href="#" class="btn btn-outline-danger text-center w-50">看食記</a>
                     </div>
                 </div>
             </div>

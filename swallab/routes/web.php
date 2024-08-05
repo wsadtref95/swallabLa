@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\FoodItemController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CartController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -66,6 +67,7 @@ Route::view('/headpage/Fheadpage','headpage/Fheadpage');
 
 
 
+
 // =============================餐廳(非會員)==================================
 Route::view('/restaurant/detail','restaurant/detail');
 
@@ -95,3 +97,6 @@ Route::view('/backstage/set_time','backstage/set_time');
 Route::view('/backstagetest/test','backstagetest/test');
 Route::post('/menu/store', [MenuController::class, 'store'])->name('menu.store');
 Route::get('/restaurant/detail', [MenuController::class, 'index'])->name('restaurant.detail');
+
+// ===============================================================
+Route::post('/add-to-cart', [CartController::class, 'addToCart']);
