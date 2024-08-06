@@ -10,10 +10,8 @@ class CommentController extends Controller
 {
     public function show($id)
     {
-        // 獲取該食記的評論
-        $comments = Comment::where('post_id', $id)->with('user')->get();
+        $comments = Comment::where('post_id', $id)->with('user')->orderBy('created_at', 'desc')->get();
 
-        // 將評論傳遞給視圖
         return view('foodNotes.demoHotpot', compact('comments', 'id'));
     }
 
@@ -25,7 +23,7 @@ class CommentController extends Controller
 
         Comment::create([
             'user_id' => Auth::id(),
-            'post_id' => $request->post_id, // 確保有傳遞post_id
+            'post_id' => $request->post_id,
             'comment' => $request->comment,
         ]);
 

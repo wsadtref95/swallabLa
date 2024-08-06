@@ -49,7 +49,7 @@
     <nav class="navbar navbar-expand sticky-top shadow">
         <div class="container">
             <!-- LOGO -->
-            <a class="navbar-brand ms-5 col-1" href="{{ route('headpage') }}">
+            <a class="navbar-brand ms-5 col-1" href="{{ url('http://localhost/swallabLa/swallab/public/headpage/headpage') }}">
                 <img src="{{ asset('images/root/logo.jpg') }}" alt=""
                     class="logo d-inline-block align-text-top">
             </a>

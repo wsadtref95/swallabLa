@@ -1,8 +1,17 @@
 @extends('layouts.app')
 
-@section('title', '會員中心->我的訂單')
+@section('title', '青花驕麻辣鍋')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+<link rel="stylesheet" href="{{ asset('css/demoHotpot.css') }}">
+<link href="{{ asset('css/root.css') }}" rel="stylesheet">
+<link href="{{ asset('css/nav.css') }}" rel="stylesheet">
+<link href="{{ asset('css/footer.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
 <div class="container p-0">
     <div class="row d-flex justify-content-center p-2 m-0 mt-5 mb-4">
         <div class="col-3 p-3">
@@ -35,11 +44,50 @@
                 </div>
             </div>
             <article class="mt-4 bigArticle">
-                <!-- 文章內容 -->
+                <p class="mb-5">
+                    青花驕麻辣鍋是王品集團推出的麻辣鍋品牌餐廳，麻辣湯頭加入重慶的九葉青花椒熬煮，鮮麻香醇，非常吸引我。想不到幫同事的慶生聚餐，壽星就選定青花驕麻辣鍋崇德店，當餐廳人選丟出來的時候，我完全是舉雙手雙腳同意的啊🙋‍♀️預訂好日期後，大家一起騎車前往青花驕麻辣鍋報到！
+                </p>
+                <p class="mb-3">
+                    ▼青花驕麻辣鍋台中崇德店位於崇德路三段與崇德九路交叉口，附近美食還有奧樂美特、很牛炭燒牛排、森森燒肉、拾七石頭火鍋、八豆食府、本格和牛燒肉放題、尚牛二館…等，完全是個美食餐廳聚集地。
+                </p>
+                <img src="{{ asset('images/foodnotes_demo/qhj_1.webp') }}" alt="" class="mb-5" />
+                <p class="mb-3">
+                    ▼青花椒麻辣鍋，湯頭喝起來微麻帶辣、香醇順口，不過可能是我嘴鈍，覺得重慶江津九葉青花椒的層次香氣不明顯，好喝但不特別。而鍋底的鴨血滑嫩、豆腐孔洞不算多但有入味好吃。
+                </p>
+                <img src="{{ asset('images/foodnotes_demo/qhj_spicyhotpot.jpg') }}" alt="" class="mb-5" />
+                <p class="mb-3">
+                    ▼青花椒麻口水雞，椒麻醬香氣十足，雞肉也蠻嫩的，好吃。
+                </p>
+                <img src="{{ asset('images/foodnotes_demo/qhj_chicken.jpg') }}" alt="" class="mb-5" />
+                <p class="mb-3">
+                    ▼牛三拼盛宴(牛小排、雪花牛、牛梅花)，我最喜歡油脂分布均勻的牛小排，在熱湯裡輕涮至粉紅色就可以吃啦，香軟嫩口！
+                </p>
+                <img src="{{ asset('images/foodnotes_demo/qhj_beef.jpg') }}" alt="" class="mb-5" />
+                <p class="mb-3">
+                    ▼仙氣海宴，這整盤~我只吃到了干貝，煮熟後軟彈帶嫩，不錯吃。
+                </p>
+                <img src="{{ asset('images/foodnotes_demo/qhj_seafood.jpg') }}" alt="" class="mb-5" />
+                <p class="mb-3">
+                    ▼鮮蝦滑、墨魚滑，鮮蝦滑吃得到蝦肉、墨魚滑也吃得到細小墨魚肉，蠻實在的。
+                </p>
+                <img src="{{ asset('images/foodnotes_demo/qhj_shrimp.jpg') }}" alt="" class="mb-5" />
+                <p class="mb-3">
+                    ▼甜點冰糖銀耳，裡頭除了細細的銀耳還有枸杞，冰甜好喝，只有一小杯不夠啊~
+                </p>
+                <img src="{{ asset('images/foodnotes_demo/qhj_dessert.jpg') }}" alt="" class="mb-5" />
+
+                <article>
+                    <h5>青花驕麻辣鍋 台中崇德店</h5>
+                    <p>均消：<span>600</span>~<span>900</span>元</p>
+                    <p>電話：<span>04-2422-3286</span></p>
+                    <p>地址：<span>台中市北屯區崇德路三段189號</span></p>
+                    <p>營業時間：<span>11:00</span>~<span>1:00</span></p>
+                </article>
             </article>
         </div>
         <hr class="hrStyle">
-        <div id="comment" class="p-4">
+
+        <div class="p-4">
             <div class="d-flex justify-content-between align-items-center commentTitle">
                 <h3 class="m-0">評論區</h3>
                 <i class="fa-solid fa-pen-to-square" data-bs-toggle="modal" data-bs-target="#myModal"></i>
@@ -56,7 +104,7 @@
                         <div class="modal-body">
                             <form action="{{ route('comments.store') }}" method="POST">
                                 @csrf
-                                <input type="hidden" name="post_id" value="{{ $id }}"> <!-- 傳遞post_id -->
+                                <input type="hidden" name="post_id" value="{{ $id }}">
                                 <div class="form-group">
                                     <label for="comment">留言：</label>
                                     <textarea name="comment" id="comment" class="form-control" rows="3"></textarea>
@@ -68,23 +116,32 @@
                 </div>
             </div>
 
-            <h2>留言列表</h2>
-            @foreach ($comments as $comment)
-                <div class="media mb-3">
-                    <img src="{{ $comment->user->avatar }}" class="mr-3 rounded-circle" width="50" alt="{{ $comment->user->name }}">
-                    <div class="media-body">
-                        <h5 class="mt-0">{{ $comment->user->name }}</h5>
-                        <p>{{ $comment->comment }}</p>
-                        <small>{{ $comment->created_at->diffForHumans() }}</small>
+            <div id="messages-container">
+                @foreach ($comments as $comment)
+                    <div class="d-flex justify-content-center mt-4 m-0">
+                        <div class="row d-flex justify-content-center m-2 p-2 commentHeadphoto">
+                            <div class="col-4 d-flex flex-column align-items-center justify-content-center p-3">
+                                <img src="{{ $comment->user->avatar_url }}" alt="{{ $comment->user->name }}" />
+                                <div>{{ $comment->user->name }}</div>
+                            </div>
+                            <div class="col-8 p-0 d-flex flex-column">
+                                <p>{{ $comment->comment }}</p>
+                                <p>{{ \Carbon\Carbon::parse($comment->created_at)->locale('zh_TW')->diffForHumans() }}</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </div>
 </div>
 
 <img src="{{ asset('images/other/top.png') }}" alt="" class="top" id="top" />
-<script src="{{ asset('js/demoHotpot.js') }}"></script>
+
+
+
 <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
 <script src="{{ asset('js/jquery-3.7.1.js') }}"></script>
+<script src="{{ asset('js/demoHotpot.js') }}"></script>
+<script src="{{ asset('js/footer.js') }}"></script>
 @endsection

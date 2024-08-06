@@ -172,27 +172,10 @@
             </div>
             
         </div>
-        
-
-
 
     </div>
-
-
-
-
-
-
-
-    
-
- 
-
-
-
-                
-
-    
+          
+   
     <!-- TOP按鈕 -->
     <img src="../images/other/top.png" alt="" class="top" id="top"/>
 

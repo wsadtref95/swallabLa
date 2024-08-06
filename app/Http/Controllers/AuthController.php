@@ -12,13 +12,11 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-   
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -27,7 +25,6 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            //當使用者成功登入後，會執行 $request->session()->regenerate();  將舊會話 ID（例如 abc123）中的所有會話數據（如使用者資訊、購物車內容等）轉移到新的會話 ID 中。
             $request->session()->regenerate();
 
             $user = Auth::user();
@@ -40,10 +37,9 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => __('auth.failed'), 
+            'email' => __('auth.failed'),
         ])->onlyInput('email');
     }
-
 
     public function register(Request $request)
     {
@@ -52,17 +48,23 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|in:admin,member',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        $avatarPath = null;
+        if ($request->hasFile('avatar')) {
+            $avatarPath = $request->file('avatar')->store('avatars', 'public');
+        }
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
-            'avatar' => 'avatars/profile.jpg',
+            'avatar' => $avatarPath ? 'avatars/' . basename($avatarPath) : null,
         ]);
 
-        Auth::login($user); 
+        Auth::login($user);
 
         if ($user->role == 'admin') {
             return redirect('/admin');
@@ -71,7 +73,6 @@ class AuthController extends Controller
         }
     }
 
-    
     public function forgotPassword(Request $request)
     {
         $request->validate(['email' => 'required|email']);
@@ -84,7 +85,6 @@ class AuthController extends Controller
             ? back()->with('status', '密碼重設連結已送到信箱。')
             : back()->withErrors(['email' => __($status)]);
     }
-
 
     public function resetPassword(Request $request)
     {
@@ -120,7 +120,6 @@ class AuthController extends Controller
         }
     }
 
-   
     public function logout(Request $request)
     {
         Auth::logout();
@@ -130,6 +129,4 @@ class AuthController extends Controller
 
         return redirect('/');
     }
-
-    
 }

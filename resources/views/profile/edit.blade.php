@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="{{ asset('css/profilexi.css') }}" rel="stylesheet">
     <link href="{{ asset('css/backstage.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -18,15 +21,19 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="container-md">
             <div class="row ">
                 <div class="col-6">
-                    <img src="{{ asset('/images/other/logo.jpg') }}" style="border-radius: 50%; width:15%" class="m-2 ">
+                    <a href="{{ url('http://localhost/swallabLa/swallab/public/headpage/headpage') }}"> <img
+                            src="{{ asset('/images/other/logo.jpg') }}" style="border-radius: 50%; width:15%"
+                            class="m-2 ">
+                    </a>
                 </div>
             </div>
-        </div>  
+        </div>
     </header>
     <div class="container">
         <div class="row">
@@ -51,18 +58,23 @@
                     </div>
                 </div>
                 <div class="container mt-3">
-                    <form id="profile-form" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                    <form id="profile-form" action="{{ route('profile.update') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="ml-5 d-flex">
-                                <img id="avatar-display" src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('image/大專logo.png') }}" style="width: 180px; height: auto; cursor: pointer;"> 
+                                <img id="avatar-display"
+                                    src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('image/大專logo.png') }}"
+                                    style="width: 180px; height: auto; cursor: pointer;">
                                 <input type="file" id="avatar-input" name="avatar" style="display: none;">
                                 <div class="col-md-5 ml-5 ">
                                     <div class="form-group">
-                                        <input type="text" placeholder="請輸入姓名" class="form-control" id="name" name="name" value="{{ $user->name }}">
+                                        <input type="text" placeholder="請輸入姓名" class="form-control" id="name"
+                                            name="name" value="{{ $user->name }}">
                                     </div>
                                     <div class="form-group adjusted">
-                                        <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" readonly>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            value="{{ $user->email }}" readonly>
                                     </div>
                                     <div class="icon mt-2">
                                         <i class="fa-brands fa-instagram me-2 ms-2"></i>
@@ -70,11 +82,13 @@
                                         <i class="fa-brands fa-threads me-2 ms-2"></i>
                                     </div>
                                 </div>
-                                <div class="col-md-7 ml-5 ">  
+                                <div class="col-md-7 ml-5 ">
                                     <div class="form-group">
-                                        <input type="text" placeholder="請輸入電話" class="form-control" id="phone" name="phone" value="{{ $user->phone }}">
+                                        <input type="text" placeholder="請輸入電話" class="form-control" id="phone"
+                                            name="phone" value="{{ $user->phone }}">
                                     </div>
-                                    <button class="d-flex delete" data-toggle="modal" data-target="#changePasswordModal">更改密碼</button>
+                                    <button class="d-flex delete" data-toggle="modal"
+                                        data-target="#changePasswordModal">更改密碼</button>
                                     <button class="d-flex delete">刪除帳戶</button>
                                 </div>
                             </div>
@@ -147,4 +161,5 @@
         };
     </script>
 </body>
+
 </html>

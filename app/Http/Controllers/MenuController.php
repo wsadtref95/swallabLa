@@ -35,6 +35,6 @@ class MenuController extends Controller
         $menu->user_id = Auth::id();
         $menu->save();
 
-        return redirect()->back()->with('success', '菜單項目已成功添加');
+        return redirect()->back()->with('success', '菜單已成功添加');
     }
 }
