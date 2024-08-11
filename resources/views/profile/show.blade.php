@@ -60,7 +60,7 @@
                 <div class="container mt-3">
                     <div class="row">
                         <div class="ml-5 d-flex">
-                            <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('image/大專logo.png') }}"
+                            <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('/images/other/default-avatar.jpg') }}"
                                 style="width: 180px; height: auto;">
                             <div class="col-md-5 ml-5 ">
                                 <div class="name">{{ $user->name }}</div>
@@ -76,7 +76,9 @@
 
                             <div class="col-md-7 ">
                                 <div class="follow">30 追蹤中 20 粉絲</div>
-                                <div class="follow">{{ $user->phone }}</div>
+                                @if ($user->phone)
+                                    <div class="follow">{{ $user->phone }}</div>
+                                @endif
 
                                 <a href="{{ route('profile.edit') }}" class="d-flex delete mx-5">編輯個人檔案</a>
                                 {{-- <button class="d-flex delete">刪除帳戶</button> --}}

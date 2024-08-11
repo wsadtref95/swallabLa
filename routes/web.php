@@ -103,6 +103,7 @@ Route::view('/backstagetest/test', 'backstagetest/test');
 Route::post('/menu/store', [MenuController::class, 'store'])->name('menu.store');
 Route::get('/restaurant/detail', [MenuController::class, 'index'])->name('restaurant.detail');
 
+
 // ===============================================================
 Route::post('/add-to-cart', [CartController::class, 'addToCart']);
 

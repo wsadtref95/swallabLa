@@ -4,24 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Menu;
+use App\Models\restaurant;
 use Illuminate\Support\Facades\Auth;
 
 class MenuController extends Controller
 {
 
 
+    // public function index()
+    // {
+    //     $menus = Menu::all();
+    //     return view('/restaurant/detail', compact('menus'));
+    // }
+
     public function index()
     {
-        $menus = Menu::all();
-        return view('/restaurant/detail', compact('menus'));
+        $restaurants = restaurant::all();
+        return view('/restaurant/detail', compact('restaurants'));
     }
+
 
     public function store(Request $request)
     {
         $request->validate([
             'foodName' => 'required|string|max:255',
             'foodPrice' => 'required|numeric',
-            'foodPhoto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foodPhoto' => 'required|image|mimes:jpeg,png,jpg,gif,avif,svg|max:10240',
         ]);
 
         $foodPhoto = $request->file('foodPhoto');

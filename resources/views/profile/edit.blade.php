@@ -64,7 +64,7 @@
                         <div class="row">
                             <div class="ml-5 d-flex">
                                 <img id="avatar-display"
-                                    src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('image/大專logo.png') }}"
+                                    src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('/images/other/default-avatar.jpg') }}"
                                     style="width: 180px; height: auto; cursor: pointer;">
                                 <input type="file" id="avatar-input" name="avatar" style="display: none;">
                                 <div class="col-md-5 ml-5 ">

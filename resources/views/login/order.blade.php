@@ -82,6 +82,7 @@
                         </div>
                     </div>
                 </div>
+                <hr>
                 <div id="cart-container">
                     {{-- 餐點顯示位置 --}}
                 </div>

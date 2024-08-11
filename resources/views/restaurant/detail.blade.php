@@ -7,12 +7,56 @@
 @push('scripts')
     @include('layouts.map')
     <script>
-       
         const assetBaseUrl = "{{ asset('storage/photos') }}";
         const assetBaseUrlShowCart = "{{ asset('storage/photos') }}";
+        // 把 Blade 變數轉換為 JSON 格式
+        // var restaurants = @json($restaurants);
+
+        // // 使用 filter 篩選出 class 等於 19 的餐點
+        // var filteredRestaurants = restaurants.filter(function(restaurant) {
+        //     return restaurant.class == 19;
+        // });
+
+        // // 使用 map 提取出需要的屬性
+        // var meals = filteredRestaurants.map(function(restaurant) {
+        //     return {
+        //         meals_name: restaurant.meals_name,
+        //         photo: restaurant.photo,
+        //         price: restaurant.price
+        //     };
+        // });
+
+        // // 在控制台中顯示篩選結果
+        // console.log(meals);
+
+        // // 或者你可以遍歷並顯示每個餐點
+        // meals.forEach(function(meal) {
+        //     console.log('Name:', meal.meals_name);
+        //     console.log('Photo:', meal.photo);
+        //     console.log('Price:', meal.price);
+        // });
+
+        function filterItems(classId) {
+            // 先隱藏所有餐點
+            var allItems = document.querySelectorAll('.restaurant-item');
+            allItems.forEach(function(item) {
+                if (classId === 0) {
+                    // 如果 classId 是 0，顯示所有餐點
+                    item.style.display = 'block';
+                } else if (item.getAttribute('data-class') == classId) {
+                    // 否則只顯示符合條件的餐點
+                    item.style.display = 'block';
+                } else {
+                    // 隱藏不符合條件的餐點
+                    item.style.display = 'none';
+                }
+            });
+        }
     </script>
     <script src="{{ asset('/js/cart.js') }}"></script>
+
 @endpush
+    
 
 @section('title', '餐廳內頁')
 
@@ -99,32 +143,33 @@
                 <!-- 側邊欄 -->
                 <div class="col-2 custom-ul sticky-top">
                     <div class="mb-2 mt-3">
-                        <a href="https://www.google.com.tw/"><img src="{{ asset('images/other/hot_2.png') }}"
+                        <a href="#all" onclick="filterItems(0)"><img src="{{ asset('images/other/hot_2.png') }}"
                                 style="width: 150px;" alt=""></a>
-                        <li>招牌餐點</li>
+                        <li>全部餐點</li>
                     </div>
                     <div class="">
                         <a href="https://www.google.com.tw/"><img src="{{ asset('images/other/limited_time_offer.png') }}"
                                 style="width: 100px;" alt=""></a>
                         <li>限時優惠</li>
                     </div>
-                    <div class="mt-2">
-                        <a href="https://www.google.com.tw/"><img src="{{ asset('images/other/vegetable_6.jpeg') }}"
-                                style="width: 100px;" alt=""></a>
+                    <div class="mb-2 mt-3">
+                        <a href="#vegetable" onclick="filterItems(19)"><img
+                                src="{{ asset('images/other/vegetable_6.jpeg') }}" style="width: 100px;" alt=""></a>
                         <li>青菜</li>
                     </div>
+
                     <div class="mt-2">
-                        <a href="https://www.google.com.tw/"><img src="{{ asset('images/other/dumpling.png') }}"
+                        <a href="#dumpling" onclick="filterItems(18)"><img src="{{ asset('images/other/dumpling.png') }}"
                                 style="width: 100px; border: none; background-color: transparent;" alt=""></a>
                         <li>餃類</li>
                     </div>
                     <div class="mt-2">
-                        <a href="https://www.google.com.tw/"><img src="{{ asset('images/other/porkball_1.jpg') }}"
+                        <a href="#porkball" onclick="filterItems(15)"><img src="{{ asset('images/other/porkball_1.jpg') }}"
                                 style="width: 100px;" alt=""></a>
                         <li>丸子</li>
                     </div>
                     <div class="mt-2 mb-5">
-                        <a href="https://www.google.com.tw/"><img src="{{ asset('images/other/rice.png') }}"
+                        <a href="#rice" onclick="filterItems(17)"><img src="{{ asset('images/other/rice.png') }}"
                                 style="width: 80px;" alt=""></a>
                         <li>主食</li>
                     </div>
@@ -132,8 +177,9 @@
                 <!-- 餐點 -->
                 <div class="col-9 mb-5 ml-5">
                     <div class="ml-3 mb-4" style="font-size: 30px; font-weight: bold;">招牌餐點</div>
-                    <div class="row">
-                        @foreach ($menus as $menu)
+                    <hr>
+                    <div class="row" id="food-list">
+                        {{-- @foreach ($menus as $menu)
                             <div class="col-4 mb-4">
                                 <img class="ml-3 myimg" src="{{ asset('storage/photos/' . $menu->food_photo) }}"
                                     alt="{{ $menu->food_name }}">
@@ -142,8 +188,23 @@
                                 <button class="score ml-5"
                                     onclick="addToCart({{ $menu->id }}, '{{ $menu->food_name }}', {{ $menu->food_price }}, '{{ $menu->food_photo }}')">加入購物車</button>
                             </div>
+                        @endforeach --}}
+
+                        {{-- 預設顯示的餐點，這裡可以顯示所有餐點或者某個範例 --}}
+                        @foreach ($restaurants as $restaurant)
+                            <div class="col-4 mb-4 restaurant-item" data-class="{{ $restaurant->class }}">
+                                <img class="ml-3 myimg" src="{{ asset('storage/photos/' . $restaurant->photo) }}"
+                                    alt="{{ $restaurant->meals_name }}">
+                                <div class="name">{{ $restaurant->meals_name }}</div>
+                                <div class="price">${{ $restaurant->price }}</div>
+                                <button class="score ml-5"
+                                    onclick="addToCart({{ $restaurant->id }}, '{{ $restaurant->meals_name }}', {{ $restaurant->price }}, '{{ $restaurant->photo }}')">加入購物車</button>
+                            </div>
                         @endforeach
-                    </div>
+
+
+
+                        {{-- </div>
                     <!-- 其他動態菜單類型 -->
                     <div class="ml-3 mb-4" style="font-size: 30px; font-weight: bold;">限時優惠</div>
                     <div class="row">
@@ -152,112 +213,119 @@
                     <div class="ml-3 mb-4" style="font-size: 30px; font-weight: bold;">餃類</div>
                     <div class="row">
                         <!-- 動態生成餃類菜單項目 -->
+                    </div> --}}
                     </div>
                 </div>
+
+                <!-- 留言區 -->
+                <div class="ml-3 mb-4" style="font-size: 30px; font-weight: bold;">大家怎麼說</div>
+                <div class="row">
+                    <div class="col-3">
+                        <img class="ml-2" src="{{ asset('images/root/LOGO.jpg') }}" style="width: 150px;">
+                    </div>
+                    <div class="col-9">
+                        <div>
+                            一進門椒麻香氣撲鼻而來，接待員親切的接待⋯雖然第一次，但餐點沒讓人失望⋯我們點了雙人套餐，酸菜白肉（微酸而不嗆）+麻辣（麻而不辣）湯底真的絕配，也適合孩子，原本還擔心吃不飽，結果～飽到吃不完。白飯粒粒分明是我愛的、鮮蝦滑蝦子多看得到、手工麵Q彈量多、油條適合麻辣湯底、鴨血豆腐品質保證，青花驕特調烏梅汁搭配碎冰真的驚艷⋯唇齒留香讓人回味
+                        </div>
+                        <div class="date">2024/5/1</div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-3">
+                        <img class="ml-2" src="{{ asset('images/root/LOGO.jpg') }}" style="width: 150px;">
+                    </div>
+                    <div class="col-9">
+                        <div>
+                            好吃平日雙人套餐優惠
+                            份量多 還吃不完
+                            沒吃完會主動詢問要不要打包👍
+                            吃麻辣鍋湯底有鴨血豆腐
+                            外帶還另外給一包鴨血豆腐
+                            超貼心、餐點又好吃
+                            便宜！真的大推
+                            第一次吃很稱讚👏
+                        </div>
+                        <div class="date" style="margin-top: 60px;">2024/6/1</div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row hidden" id="hidden-Comment" style="display: none;">
+                    <div class="col-3">
+                        <img class="ml-2" src="{{ asset('images/root/LOGO.jpg') }}" style="width: 150px;">
+                    </div>
+                    <div class="col-9">
+                        <div>
+                            第二次來用餐，3種部位的牛肉品質都不錯，且份量足，吃得很開心。海鮮的部分生蠔與干貝已說明不可生食，烹煮後相當甘甜嫩滑，也很好吃，不過CP值略低。每人有收取鍋底費用，最後的打包誠意十足，可以回家後繼續享用。整體而言是值得再訪的餐廳。
+                        </div>
+                        <div class="date" style="margin-top: 60px;">2024/8/1</div>
+                    </div>
+                </div>
+                <button class="score" style="margin-left: auto; margin-top: 10px;"
+                    onclick="showMore('hidden-Comment')">顯示更多</button>
             </div>
 
-            <!-- 留言區 -->
-            <div class="ml-3 mb-4" style="font-size: 30px; font-weight: bold;">大家怎麼說</div>
-            <div class="row">
-                <div class="col-3">
-                    <img class="ml-2" src="{{ asset('images/root/LOGO.jpg') }}" style="width: 150px;">
-                </div>
-                <div class="col-9">
-                    <div>
-                        一進門椒麻香氣撲鼻而來，接待員親切的接待⋯雖然第一次，但餐點沒讓人失望⋯我們點了雙人套餐，酸菜白肉（微酸而不嗆）+麻辣（麻而不辣）湯底真的絕配，也適合孩子，原本還擔心吃不飽，結果～飽到吃不完。白飯粒粒分明是我愛的、鮮蝦滑蝦子多看得到、手工麵Q彈量多、油條適合麻辣湯底、鴨血豆腐品質保證，青花驕特調烏梅汁搭配碎冰真的驚艷⋯唇齒留香讓人回味
-                    </div>
-                    <div class="date">2024/5/1</div>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-3">
-                    <img class="ml-2" src="{{ asset('images/root/LOGO.jpg') }}" style="width: 150px;">
-                </div>
-                <div class="col-9">
-                    <div>
-                        好吃平日雙人套餐優惠
-                        份量多 還吃不完
-                        沒吃完會主動詢問要不要打包👍
-                        吃麻辣鍋湯底有鴨血豆腐
-                        外帶還另外給一包鴨血豆腐
-                        超貼心、餐點又好吃
-                        便宜！真的大推
-                        第一次吃很稱讚👏
-                    </div>
-                    <div class="date" style="margin-top: 60px;">2024/6/1</div>
-                </div>
-            </div>
-            <hr>
-            <div class="row hidden" id="hidden-Comment" style="display: none;">
-                <div class="col-3">
-                    <img class="ml-2" src="{{ asset('images/root/LOGO.jpg') }}" style="width: 150px;">
-                </div>
-                <div class="col-9">
-                    <div>
-                        第二次來用餐，3種部位的牛肉品質都不錯，且份量足，吃得很開心。海鮮的部分生蠔與干貝已說明不可生食，烹煮後相當甘甜嫩滑，也很好吃，不過CP值略低。每人有收取鍋底費用，最後的打包誠意十足，可以回家後繼續享用。整體而言是值得再訪的餐廳。
-                    </div>
-                    <div class="date" style="margin-top: 60px;">2024/8/1</div>
-                </div>
-            </div>
-            <button class="score" style="margin-left: auto; margin-top: 10px;" onclick="showMore('hidden-Comment')">顯示更多</button>
-        </div>
-
-        <!-- 購物車modal -->
-        <div class="modal fade" id="addCartModal" tabindex="-1" aria-labelledby="addCartLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addCartLabel">加入購物車</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div id="cart-item">
-                            <img id="cart-item-image" src="" class="product-img" style="width: 100px; height: auto;">
-                            <div class="product-details">
-                                <div id="cart-item-name" class="items mt-3"></div>
-                                <div class="d-flex mt-4 ml-4">
-                                    <span>$</span>
-                                    <span id="cart-item-price" class="prices"></span>
+            <!-- 購物車modal -->
+            <div class="modal fade" id="addCartModal" tabindex="-1" aria-labelledby="addCartLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="background-color: #EEE9D5;">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addCartLabel">加入購物車</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="cart-item" class="d-flex">
+                                <!-- 左側：圖片與餐點信息 -->
+                                <div class="d-flex flex-column align-items-center">
+                                    <div id="cart-item-name" class="items ms-5 blockquote"></div>
+                                    <br>
+                                    <img id="cart-item-image" src="" class="product-img" style="width: 100px; height: auto;">
+                                    <div class="mt-2">
+                                        <span>$</span>
+                                        <span id="cart-item-price" class="prices"></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="product-actions">
-                                <div class="ml-5 mt-3">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-button" onclick="decrement('cart-item-quantity', 'cart-item-price', 'cart-item-total')">-</button>
-                                    <span id="cart-item-quantity" class="number-span fs-20">1</span>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-button" onclick="increment('cart-item-quantity', 'cart-item-price', 'cart-item-total')">+</button>
-                                    <div id="cart-item-total" class="mt-3 ml-1">$0</div>
+                                <!-- 右側：數量調整與總價 -->
+                                <div class="d-flex align-items-center mt-5 mx-5">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-circle" style="width: 40px; height: 40px;" onclick="decrement('cart-item-quantity', 'cart-item-price', 'cart-item-total')">-</button>
+                                    <span id="cart-item-quantity" class="mx-3">1</span>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-circle" style="width: 40px; height: 40px;" onclick="increment('cart-item-quantity', 'cart-item-price', 'cart-item-total')">+</button>
+                                    <div id="cart-item-total" class="ml-4">$0</div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="confirmAddToCart()">確定</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 購物車總覽modal -->
-        <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="cartLabel">購物車</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div id="cart-contents"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="d-flex justify-content-between w-100">
-                            <div id="cart-total" class="fw-bold"></div>
-                            <a href="{{ url('/login/profile/order') }}">前往購物車</a>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" onclick="confirmAddToCart()">確定</button>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            
+            
+
+            <!-- 購物車總覽modal -->
+            <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartLabel" aria-hidden="true">
+                <div  class="modal-dialog">
+                    <div style="background-color: #EEE9D5;" class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="cartLabel">購物車</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="cart-contents"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="d-flex justify-content-between w-100">
+                                <div id="cart-total" class="fw-bold"></div>
+                                <a href="{{ url('/login/profile/order') }}">前往購物車</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-    </div>
-@endsection
+    @endsection
