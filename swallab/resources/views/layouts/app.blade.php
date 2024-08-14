@@ -6,20 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', '餐廳網站')</title>
-    <link rel="stylesheet" href="{{ asset('css/detailxi.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">{{-- 不能刪 --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.map"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>  {{-- 不能刪 --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.map"></script> --}}
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> {{-- 不能刪 --}}
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/orderxi.css') }}">
     <link rel="stylesheet" href="{{ asset('css/root.css') }}">
     <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('css/headpage.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/orderxi.css') }}">
     <link rel="stylesheet" href="{{ asset('css/backstage.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/foodNotes.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/demoHotpot.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detailxi.css') }}">
+   
+
+    
     <style>
         #aa {
             background-image: url('{{ asset('images/other/subtle_white_feathers.webp') }}');
@@ -47,7 +52,7 @@
     <nav class="navbar navbar-expand sticky-top shadow">
         <div class="container">
             <!-- LOGO -->
-            <a class="navbar-brand ms-5 col-1" href="{{ route('headpage') }}">
+            <a class="navbar-brand ms-5 col-1" href="{{ url('http://localhost/swallabLa/swallab/public/headpage/headpage') }}">
                 <img src="{{ asset('images/root/logo.jpg') }}" alt=""
                     class="logo d-inline-block align-text-top">
             </a>
@@ -56,11 +61,11 @@
                 <div class="nav ms-0 me-3 row">
                     <div class="nav-item col-6">
                         <a id="rest" class="nav-link d-block nav_mainbtn"
-                            href="{{ url('/restaurant/detail') }}">找餐廳</a>
+                            href="{{ url('http://localhost/swallab/Swallab/restaurant/restaurant.html') }}">找餐廳</a>
                     </div>
                     <div class="nav-item col-6">
                         <a id="resta" class="nav-link d-block nav_mainbtn"
-                            href="{{ url('/foodNotes/foodNotes') }}">看食記</a>
+                            href="{{ url('http://localhost/swallab/Swallab/foodNotes/foodNotes.html') }}">看食記</a>
                     </div>
                 </div>
                 <!-- Input 都在這 -->
@@ -158,7 +163,7 @@
     {{-- footer --}}
 
     <footer>
-        <div class="container-md"> <!-- 根據需要調整數值 -->
+        <div class="container-md"> 
             <div class="row">
                 <div class="col-6">
                     <img src="{{ asset('images/root/LOGO.jpg') }}" style="border-radius: 50%; width:15%"
@@ -168,8 +173,8 @@
         </div>
     </footer>
 
-    <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script> --}}
     @stack('scripts')
 </body>
 

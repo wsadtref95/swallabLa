@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-         <nav class="navbar navbar-expand bg-primary sticky-top shadow bg-body rounded">
+        <nav class="navbar navbar-expand bg-primary sticky-top shadow bg-body rounded">
         <div class="container-fluid">
             <!-- LOGO -->
             <a class="navbar-brand ms-5" href="#">
@@ -52,9 +52,8 @@
                                 style="display: block; margin-left: 70%; margin-top: 1.5em; white-space: nowrap;">
                                 <img class="icon" src="../images/other/handshake.png" alt="">商務
                             </button>
-                            <button class="position-absolute translate-middle rounded-pill"
-                                style="display: block; margin-left: 90%; margin-top: 1.5em; white-space: nowrap;">
-                                <img class="icon" src="../images/other/disabled-people.png" alt="">無障礙
+                            <button class="position-absolute translate-middle rounded-pill" style="display: block; margin-left: 90%; margin-top: 1.5em; white-space: nowrap;">
+                                <img class="icon" src="../images/other/disabledpeople.png" alt="">無障礙
                             </button>
                         </div>
                         <!-- 搜尋 icon = submit -->
@@ -81,7 +80,7 @@
    <div class="container p-0">
         <div class="row d-flex justify-content-center p-0 mt-5 mb-2">
             <!-- 個人資訊 -->
-            <img src="../images/other/winnie.webp" class="img-fluid col-4 p-0 headphoto"></img>
+            <img src="../images/other/winnie.webp" class="img-fluid col-4 p-0 headphoto"/>
             <div class="col-8 p-3">
                 <div class="d-flex justify-content-center align-items-center p-3">
                     <div  class="d-flex" style="gap:150px;">
@@ -101,7 +100,7 @@
                             <div class="d-flex justify-content-center align-items-center">
                                 <h4 class="followTitle">
                                     <strong>30</strong> 追蹤中 
-                                    <strong id="fans">20</strong> 粉絲
+                                    <strong id="fans">100</strong> 粉絲
                                 </h4>
                             </div>
                             <div class="d-flex justify-content-center align-items-center">
@@ -125,7 +124,7 @@
             <div class="mt-5 mb-5 p-0">
                 <div class="d-flex justify-content-center mt-4 m-0">
                     <div class="row d-flex justify-content-center m-2 p-0 foodNotes-bg">
-                        <img src="../images/hotpot/qinghj.jpg" alt="" class="col-5 m-4">
+                        <img src="../images/hotpot/qinghj.jpg" alt="" class="col-5 m-4"/>
                         <div class="col-7 d-flex align-items-center ">
                             <div class="p-4">
                                 <h4  class="mb-4">青花驕</h4>
@@ -144,7 +143,7 @@
 
                 <div class="d-flex justify-content-center mt-4 m-0">
                     <div class="row d-flex justify-content-center m-2 p-0 foodNotes-bg">
-                        <img src="../images/hotpot/roudd.png" alt="" class="col-5 m-4">
+                        <img src="../images/hotpot/roudd.png" alt="" class="col-5 m-4"/>
                         <div class="col-7 d-flex align-items-center ">
                             <div class="p-4">
                                 <h4  class="mb-4">肉多多</h4>
@@ -158,7 +157,7 @@
 
                 <div class="d-flex justify-content-center mt-4 m-0">
                     <div class="row d-flex justify-content-center m-2 p-0 foodNotes-bg">
-                        <img src="../images/bbq/wuma.jpg" alt="" class="col-5 m-4">
+                        <img src="../images/bbq/wuma.jpg" alt="" class="col-5 m-4"/>
                         <div class="col-7 d-flex align-items-center ">
                             <div class="p-4">
                                 <h4  class="mb-4">屋馬燒肉</h4>
@@ -173,29 +172,13 @@
             </div>
             
         </div>
-        
-
-
 
     </div>
-
-
-
-
-
-
-
-    
-
- 
-
-
-
-                
-
-    
+          
+   
     <!-- TOP按鈕 -->
-    <img src="../images/other/top.png" alt="" class="top" id="top">
+    <img src="../images/other/top.png" alt="" class="top" id="top"/>
+
 
     <footer>
         <div class="container mt-3">
@@ -203,7 +186,7 @@
         <div class="row justify-content-center">
             <!-- 左邊logo -->
             <div class="col-4">
-                <img src="../images/other/logo.jpg" class="logo" alt="">
+                <img src="../images/other/logo.jpg" class="logo" alt=""/>
             </div>
             <!-- 右邊三列 -->
             <div class="col-4">

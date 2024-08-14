@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'phone', 'bio', 'password','role','avatar',
+        'name', 'email', 'bio', 'password', 'role', 'avatar', 'phone', 'instagram', 'facebook', 'threads',
     ];
 
     protected $hidden = [
@@ -21,5 +22,11 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-}
 
+    public function getAvatarUrlAttribute()
+    {
+        
+        // return $this->avatar ? url('storage/avatars/' . $this->avatar) : asset('images/default-avatar.jpg');
+        return $this->avatar ? ('http://localhost/swallabLa/swallab/storage/app/public/' . $this->avatar) : asset('images/default-avatar.jpg');
+    }
+}

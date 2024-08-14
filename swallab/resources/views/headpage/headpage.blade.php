@@ -32,11 +32,11 @@
                 </div>
                 <div class="col-md-5 d-flex flex-column align-items-center justify-content-center mt-3">
                     <div id="mainImageNotes" class="mb-3">
-                        <img src="{{ asset('images/headpage_mainphoto/main_notes.jpeg') }}" alt="看食記"
+                        <img  src="{{ asset('images/headpage_mainphoto/main_notes.jpeg') }}" alt="看食記"
                             class="img-fluid">
                     </div>
                     <div class="row justify-content-center w-100" id="btnNotes">
-                        <a href="#" class="btn btn-outline-danger text-center w-50">看食記</a>
+                        <a href="{{url("")}}" class="btn btn-outline-danger text-center w-50">看食記</a>
                     </div>
                 </div>
             </div>

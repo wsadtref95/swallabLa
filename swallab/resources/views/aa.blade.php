@@ -19,19 +19,21 @@
     <link href="{{ asset('css/profilexi.css') }}" rel="stylesheet">
     <link href="{{ asset('css/backstage.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <style>
         .email {
             margin-top: 15px;
         }
 
+
         .fa-instagram {
             color: #E1306C;
         }
 
+
         .fa-facebook {
             color: #4267B2
         }
+
 
         .modal {
             display: none;
@@ -166,15 +168,85 @@
                                 <textarea class="form-control" id="bio" name="bio" rows="3">{{ $user->bio }}</textarea>
                             </div>
                         </div>
-                        <div style="display: inline" class="ml-5">
-                            <button type="submit" class="delete ml-1 "><a style="text-decoration: none ; color:#fff" href="http://localhost/swallabLa/swallab/public/profile">完成編輯 </a></button>
+                        <div class="ml-5">
+                            <button type="submit" class="delete ml-1 ">完成編輯</button>
+                        </div>
+                        <hr>
+                        <div class="d-flex align-items-center">
+                            <button class="btn ml-5 delete" data-toggle="modal" data-target="#addCreditCardModal">
+                                新增信用卡
+                            </button>
+
+
+                            <!-- 下拉選單 -->
+                            <div class="dropdown">
+                                <button class="delete dropdown-toggle" type="button" id="savedCardsDropdown"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    查看信用卡
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="savedCardsDropdown"
+                                    id="savedCardsContainer">
+                                    <!-- 信用卡選項會動態生成 -->
+                                </div>
+                            </div>
                         </div>
                     </form>
-                    <hr>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+    <!-- 新增信用卡model -->
+    <div class="modal fade" id="addCreditCardModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCreditCardModalLabel">新增信用卡</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>x</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="creditCardForm">
+                        <div class="form-group">
+                            <label>信用卡號碼</label>
+                            <input type="text" id="creditCardInput" class="form-control"
+                                placeholder="xxxx xxxx xxxx xxxx" maxlength="19" required>
+                        </div>
+                        <div class="form-group">
+                            <label>到期日</label>
+                            <input type="text" id="expiryDateInput" class="form-control" placeholder="MM/YY"
+                                maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label>安全碼</label>
+                            <input type="text" class="form-control" placeholder="XXX" maxlength="3" required>
+                        </div>
+                        <div class="form-group">
+                            <label>持卡人姓名</label>
+                            <input type="text" class="form-control" placeholder="請輸入姓名" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="saveCreditCardButton" class="btn btn-primary"
+                        onclick="saveCreditCard()">儲存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {{-- <div id="savedCardsContainer"></div> --}}
+
+
     <!-- 更改密碼model -->
     <div class="modal fade" id="changePasswordModal">
         <div class="modal-dialog">
@@ -207,16 +279,9 @@
             </div>
         </div>
     </div>
-    {{-- <footer>
-        <div class="container-md">
-            <div class="row">
-                <div class="col-6">
-                    <img src="{{ asset('image/大專logo.png') }}" style="border-radius: 50%; width:15%" class="m-2 ">
-                </div>
-            </div>
-        </div>
-    </footer> --}}
     <script>
+
+
         document.getElementById('avatar-display').onclick = function() {
             document.getElementById('avatar-input').click();
         };
@@ -229,10 +294,131 @@
             }
         };
 
+
+        // 自動格式化信用卡號碼和到期日
+        document.getElementById('creditCardInput').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s+/g, ''); // 移除所有空格
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value; // 每4個數字添加一個空格
+
+
+            // 確保總共最多19個字符（16個數字和3個空格）
+            if (formattedValue.length > 19) {
+                formattedValue = formattedValue.slice(0, 19);
+            }
+
+
+            e.target.value = formattedValue;
+        });
+
+
+        document.getElementById('expiryDateInput').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\//g, ''); // 移除所有斜線
+            if (value.length > 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2); // 在第二位後添加斜線
+            }
+            e.target.value = value;
+        });
+
+
+        // 儲存信用卡
+        function saveCreditCard() {
+            let creditCardNumber = document.getElementById('creditCardInput').value;
+            let expiryDate = document.getElementById('expiryDateInput').value;
+            let creditCardForm = document.getElementById('creditCardForm');
+
+
+            // 驗證表單是否有效
+            if (creditCardForm.checkValidity()) {
+                let cards = JSON.parse(localStorage.getItem('creditCards')) || [];
+
+
+                if (cards.length < 3) {
+                    cards.push({
+                        number: creditCardNumber,
+                        expiry: expiryDate
+                    });
+                    localStorage.setItem('creditCards', JSON.stringify(cards));
+                    displaySavedCards();
+
+
+                    // 顯示成功提示
+                    alert("信用卡已成功儲存！");
+
+
+                    // 使用純 JavaScript 隱藏模態框
+                    const modal = document.getElementById('addCreditCardModal');
+                    modal.classList.remove('show');
+                    modal.style.display = 'none';
+                    document.body.classList.remove('modal-open');
+                    document.body.style.overflow = '';
+                    document.body.style.paddingRight = '';
+                } else {
+                    alert("最多只能儲存三張信用卡！");
+                }
+            } else {
+                // 如果表單無效，顯示瀏覽器的默認錯誤提示
+                creditCardForm.reportValidity();
+            }
+        }
+
+
+
+
+        // 顯示已儲存的信用卡
+        function displaySavedCards() {
+            let cards = JSON.parse(localStorage.getItem('creditCards')) || [];
+            let container = document.getElementById('savedCardsContainer');
+
+
+            container.innerHTML = '';
+            cards.forEach((card, index) => {
+                let cardElement = document.createElement('div');
+                cardElement.className = 'card mb-3';
+                cardElement.style = 'width: 18rem;';
+
+
+                let cardNumber = index + 1;
+
+
+                cardElement.innerHTML = `
+            <div class="card-body">
+                <h5 class="card-title">信用卡 ${cardNumber}</h5>
+                <p class="card-text"><strong>信用卡號碼:</strong> ${card.number}</p>
+                <p class="card-text"><strong>到期日:</strong> ${card.expiry}</p>
+                <button class="btn btn-danger" onclick="deleteCreditCard(${index})">刪除</button>
+            </div>
+        `;
+                container.appendChild(cardElement);
+            });
+        }
+
+
+        // 刪除信用卡
+        function deleteCreditCard(index) {
+            let cards = JSON.parse(localStorage.getItem('creditCards')) || [];
+            cards.splice(index, 1);
+            localStorage.setItem('creditCards', JSON.stringify(cards));
+            displaySavedCards();
+        }
+
+
+        // 初始化顯示已儲存的信用卡
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySavedCards();
+        });
+
+
+        // 監聽模態框顯示事件
+        document.getElementById('saveCreditCardButton').addEventListener('click', function() {
+            document.getElementById('creditCardForm').reset();
+        });
+
+
         function openSocialModal(platform) {
             // 設置 Modal 標題和輸入框的標籤
             document.getElementById('socialModalLabel').innerText = `填寫 ${platform} 帳戶`;
             document.getElementById('socialLabel').innerText = `${platform} 連結`;
+
 
             // 顯示 Modal
             document.getElementById('socialModal').style.display = 'block';
@@ -241,20 +427,14 @@
             document.body.style.overflow = 'hidden';
             document.body.style.paddingRight = '0px';
 
-            // 获取并显示已保存的链接
-            let userLink = '';
-            if (platform.toLowerCase() === 'instagram') {
-                userLink = '{{ $user->instagram }}';
-            } else if (platform.toLowerCase() === 'facebook') {
-                userLink = '{{ $user->facebook }}';
-            } else if (platform.toLowerCase() === 'threads') {
-                userLink = '{{ $user->threads }}';
-            }
 
-            if (userLink) {
-                document.getElementById('socialInput').value = userLink;
+            // 从 localStorage 获取并显示已保存的链接
+            const savedLink = localStorage.getItem(platform);
+            if (savedLink) {
+                document.getElementById('socialInput').value = savedLink;
             }
         }
+
 
         function closeSocialModal() {
             // 隱藏 Modal
@@ -267,64 +447,52 @@
 
 
         function saveSocialLink() {
-            const platform = document.getElementById('socialModalLabel').innerText.split(' ')[1].toLowerCase();
+            const platform = document.getElementById('socialModalLabel').innerText.split(' ')[1];
             const link = document.getElementById('socialInput').value;
 
+
             if (link) {
-                $.ajax({
-                    url: '{{ route('profile.updateSocialLink') }}',
-                    method: 'POST',
-                    data: {
-                        platform: platform, // 平台名稱 (instagram, facebook, threads)
-                        link: link,
-                        _token: '{{ csrf_token() }}' // CSRF token for security
-                    },
-                    success: function(response) {
-                        // 提示保存成功
-                        alert(`${platform.charAt(0).toUpperCase() + platform.slice(1)} 連結保存成功！`);
+                // 保存链接到 localStorage
+                localStorage.setItem(platform, link);
 
-                        // 關閉 Modal
-                        closeSocialModal();
 
-                        // 清空輸入框
-                        document.getElementById('socialInput').value = '';
-                    },
-                    error: function(xhr, status, error) {
-                        alert('保存連結時出現錯誤，請稍後再試。');
-                    }
-                });
+                // 提示保存成功
+                alert(`${platform} 連結保存成功！`);
+
+
+                // 關閉 Modal
+                closeSocialModal();
+
+
+                // 清空輸入框
+                document.getElementById('socialInput').value = '';
             }
         }
 
 
+        // 監聽 Modal 的關閉按鈕
+        document.querySelector('.modal .close').addEventListener('click', closeSocialModal);
+        document.querySelector('.modal .modal-footer .btn-primary').addEventListener('click', saveSocialLink);
+
+
         document.addEventListener('DOMContentLoaded', function() {
-            const instagramLink = '{{ $user->instagram }}';
-            const facebookLink = '{{ $user->facebook }}';
-            const threadsLink = '{{ $user->threads }}';
+            const platforms = ['Instagram', 'Facebook', 'Threads'];
 
-            if (instagramLink) {
-                const instagramIcon = document.querySelector('.fa-instagram');
-                if (instagramIcon) {
-                    instagramIcon.title = `查看 Instagram 連結: ${instagramLink}`;
-                }
-            }
 
-            if (facebookLink) {
-                const facebookIcon = document.querySelector('.fa-facebook');
-                if (facebookIcon) {
-                    facebookIcon.title = `查看 Facebook 連結: ${facebookLink}`;
+            platforms.forEach(platform => {
+                const link = localStorage.getItem(platform);
+                if (link) {
+                    const iconElement = document.querySelector(`.fa-${platform.toLowerCase()}`);
+                    iconElement.title = `查看 ${platform} 連結: ${link}`;
+                    // iconElement.style.color = '#007bff'; // 改变图标颜色以表示已保存
                 }
-            }
-
-            if (threadsLink) {
-                const threadsIcon = document.querySelector('.fa-threads');
-                if (threadsIcon) {
-                    threadsIcon.title = `查看 Threads 連結: ${threadsLink}`;
-                }
-            }
+            });
         });
     </script>
 </body>
 
 
 </html>
+
+
+

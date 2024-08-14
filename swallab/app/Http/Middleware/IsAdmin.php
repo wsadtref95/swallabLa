@@ -17,6 +17,6 @@ class IsAdmin
         }
 
         Log::warning('User is not admin or not authenticated');
-        return redirect('/backstagetest/test');
+        return redirect('http://localhost/swallab/Swallab/backstage/new_oder.html');
     }
 }

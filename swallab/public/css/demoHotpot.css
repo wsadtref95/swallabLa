@@ -3,7 +3,7 @@ header{
     background-color: #EEE9D5;
     }
 body{
-    background-image: url("../_images/其他/subtle_white_feathers.webp");
+    background-image: url("../images/other/subtle_white_feathers.webp");
     background-attachment: fixed;
     display: flex;
     flex-direction: column;
@@ -31,6 +31,10 @@ footer{
     cursor: pointer;
     z-index: 1;
     }
+.hrStyle{
+    border: 1px solid black;
+    width:80%;
+}
 
 /* 隱藏文字溢出 */
 .ellipsis { 
@@ -100,6 +104,7 @@ footer{
     margin:0px 5px;
     font-size: 25px;
 }
+#heart{display: none;}
 .fa-instagram,.fa-facebook,.fa-heart:hover{cursor: pointer;}
 /* 右邊文章-內文 */
 .bigArticle>p{
@@ -163,6 +168,7 @@ footer{
 .modal-footer>button:hover{
     color: #efa47e;
     background-color: white;
+    font-weight: bold;
 }
 /* 留言評論區-會員發表處 */
 .commentHeadphoto{

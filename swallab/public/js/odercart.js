@@ -15,8 +15,10 @@ function loadOrderCart() {
         cart.forEach((item, index) => {
             const itemRow = document.createElement('div');
             itemRow.classList.add('d-flex', 'align-items-center', 'justify-content-between', 'mb-3');
+            // <img src="{{ asset('storage/photos/${item.photo}') }}"
             itemRow.innerHTML = `
                 <div class="d-flex align-items-center">
+                
                     <img src="${assetBaseUrlShowCart}/${item.photo}" style="width: 50px; height: auto;" class="me-2">
                     <div>
                         <div>${item.name}</div>

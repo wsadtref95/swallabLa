@@ -24,7 +24,7 @@
             </div>
         </div>
     </header>
-    
+
     <div class="container">
         <div class="row">
             <div class="mySidebar col-2">
@@ -51,7 +51,8 @@
                     <div class="container mt-3">
                         <div class="row">
                             <div class="ml-5 d-flex">
-                                <img src="{{ asset($user->avatar ?? 'images/root/LOGO.jpg') }}" style="width: 180px; height: auto;">
+                                <img src="{{ asset($user->avatar ?? 'images/root/LOGO.jpg') }}"
+                                    style="width: 180px; height: auto;">
                                 <div class="col-md-5 ml-5">
                                     <div class="name">{{ $user->name }}</div>
                                     <div class="icon">
@@ -65,7 +66,8 @@
                                 </div>
                                 <div class="col-md-7 ml-5">
                                     <div class="follow">{{ $user->phone }}</div>
-                                    <button class="d-flex delete" data-toggle="modal" data-target="#changePasswordModal">更改密碼</button>
+                                    <button class="d-flex delete" data-toggle="modal"
+                                        data-target="#changePasswordModal">更改密碼</button>
                                     <button class="d-flex delete">刪除帳戶</button>
                                 </div>
                             </div>
@@ -111,7 +113,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">儲存</button>
+                    <button type="button" id="saveCreditCardButton" class="btn btn-primary">儲存</button>
                 </div>
             </div>
         </div>
@@ -158,7 +160,8 @@
         <div class="container-md">
             <div class="row">
                 <div class="col-6">
-                    <img src="{{ asset('images/root/LOGO.jpg') }}" style="border-radius: 50%; width:15%" class="m-2 ">
+                    <img src="{{ asset('images/root/LOGO.jpg') }}" style="border-radius: 50%; width:15%"
+                        class="m-2 ">
                 </div>
             </div>
         </div>
