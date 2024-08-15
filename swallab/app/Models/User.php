@@ -12,11 +12,24 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'bio', 'password', 'role', 'avatar', 'phone', 'instagram', 'facebook', 'threads',
+        'name',
+        'email',
+        'bio',
+        'password',
+        'role',
+        'avatar',
+        'phone',
+        'instagram',
+        'facebook',
+        'threads',
+        'credit_card_1',
+        'credit_card_2',
+        'credit_card_3',
     ];
 
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     protected $casts = [
@@ -25,8 +38,39 @@ class User extends Authenticatable
 
     public function getAvatarUrlAttribute()
     {
-        
+
         // return $this->avatar ? url('storage/avatars/' . $this->avatar) : asset('images/default-avatar.jpg');
         return $this->avatar ? ('http://localhost/swallabLa/swallab/storage/app/public/' . $this->avatar) : asset('images/default-avatar.jpg');
+    }
+
+    public function hasThreeCreditCards()
+    {
+        return !is_null($this->credit_card_1) &&
+            !is_null($this->credit_card_2) &&
+            !is_null($this->credit_card_3);
+    }
+
+    public function getCreditCards()
+    {
+        return array_filter([
+            $this->credit_card_1,
+            $this->credit_card_2,
+            $this->credit_card_3,
+        ]);
+    }
+
+    public function addCreditCard($creditCardData)
+    {
+        if (is_null($this->credit_card_1)) {
+            $this->credit_card_1 = $creditCardData;
+        } elseif (is_null($this->credit_card_2)) {
+            $this->credit_card_2 = $creditCardData;
+        } elseif (is_null($this->credit_card_3)) {
+            $this->credit_card_3 = $creditCardData;
+        } else {
+            throw new \Exception('最多只能儲存三張信用卡');
+        }
+
+        $this->save();
     }
 }

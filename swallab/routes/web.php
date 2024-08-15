@@ -35,7 +35,11 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+
+Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
 Route::post('/profile/update-social-link', [ProfileController::class, 'updateSocialLink'])->name('profile.updateSocialLink');
+Route::post('/profile/update-credit-card', [ProfileController::class, 'updateCreditCard'])->name('profile.updateCreditCard');
+Route::post('/profile/delete-credit-card', [ProfileController::class, 'deleteCreditCard'])->name('profile.deleteCreditCard');
 
 Route::middleware(['auth'])->group(function () {
     Route::middleware([IsAdmin::class])->group(function () {

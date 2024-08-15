@@ -61,7 +61,7 @@
                 <div class="nav ms-0 me-3 row">
                     <div class="nav-item col-6">
                         <a id="rest" class="nav-link d-block nav_mainbtn"
-                            href="{{ url('http://localhost/swallab/Swallab/restaurant/restaurant.html') }}">找餐廳</a>
+                            href="{{ url('http://localhost/swallabLa/swallab/public/restaurant/detail') }}">找餐廳</a>
                     </div>
                     <div class="nav-item col-6">
                         <a id="resta" class="nav-link d-block nav_mainbtn"

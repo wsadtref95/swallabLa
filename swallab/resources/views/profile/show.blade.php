@@ -76,28 +76,53 @@
                     <div class="col-12 d-flex justify-content-between">
                         <h4>會員中心 -> 個人檔案</h4>
                     </div>
+                    <div class="col-12 d-flex">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                    </div>
                 </div>
                 <div class="container mt-3">
                     <div class="row">
                         <div class="ml-5 d-flex">
+
                             <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('/images/other/default-avatar.jpg') }}"
                                 style="width: 180px; height: auto;">
                             <div class="col-md-5 ml-5 ">
+
                                 <div class="name">{{ $user->name }}</div>
                                 <div class="email">
                                     {{ $user->email }}
                                 </div>
                                 <div class="icon mt-2">
                                     @if ($user->instagram)
-                                        <a href="{{ $user->instagram }}" target="_blank"><i class="fa-brands fa-instagram mr-3"></i></a>
+                                        <a href="{{ $user->instagram }}" target="_blank"
+                                            style="text-decoration: none;">
+                                            <i class="fa-brands fa-instagram mr-3"></i>
+                                        </a>
+                                    @else
+                                        <i class="fa-brands fa-instagram mr-3" style="color: gray;"></i>
                                     @endif
+
                                     @if ($user->facebook)
-                                        <a href="{{ $user->facebook }}" target="_blank"><i class="fa-brands fa-facebook mr-3"></i></a>
+                                        <a href="{{ $user->facebook }}" target="_blank" style="text-decoration: none;">
+                                            <i class="fa-brands fa-facebook mr-3"></i>
+                                        </a>
+                                    @else
+                                        <i class="fa-brands fa-facebook mr-3" style="color: gray;"></i>
                                     @endif
+
                                     @if ($user->threads)
-                                        <a href="{{ $user->threads }}" target="_blank"><i class="fa-brands fa-threads mr-3"></i></a>
+                                        <a href="{{ $user->threads }}" target="_blank" style="text-decoration: none;">
+                                            <i class="fa-brands fa-threads mr-3"></i>
+                                        </a>
+                                    @else
+                                        <i class="fa-brands fa-threads mr-3" style="color: gray;"></i>
                                     @endif
                                 </div>
+
 
                             </div>
 
