@@ -109,6 +109,7 @@ Route::view('/backstage/set_time', 'backstage/set_time');
 Route::view('/backstagetest/test', 'backstagetest/test');
 Route::post('/menu/store', [MenuController::class, 'store'])->name('menu.store');
 Route::get('/restaurant/detail', [MenuController::class, 'index'])->name('restaurant.detail');
+Route::get('/restaurant/detail2', [MenuController::class, 'index2'])->name('restaurant.detail2');
 
 
 // ===============================================================
@@ -135,3 +136,6 @@ Route::post('/rcomments', [RcommentController::class, 'store'])->name('rcomment.
 
 Route::post('/get-pickup-time', [OrderController::class, 'getPickupTime']);
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+
+// ====================================
+Route::view('/aa','aa');

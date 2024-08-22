@@ -1,6 +1,6 @@
 let cart = [];
 
-
+var meals = [];
 function addToCart(id, name, price, photo) {
     //                            src = `{{ asset('storage/photos/${photo}') }}`;
     document.getElementById('cart-item-image').src = `${assetBaseUrl}/${photo}`;
@@ -14,7 +14,7 @@ function addToCart(id, name, price, photo) {
     document.getElementById('addCartModal').dataset.itemPhoto = photo;
 
 
-    removeBackdrops(); // 確保沒有多餘的 backdrop 元素
+    removeBackdrops(); // 沒有多餘的 backdrop 元素
     new bootstrap.Modal(document.getElementById('addCartModal')).show();
 }
 
@@ -42,6 +42,8 @@ function decrement(quantityId, priceId, totalId) {
 
 
 function confirmAddToCart() {
+
+
     const modal = document.getElementById("addCartModal");
     const id = modal.dataset.itemId;
     const name = modal.dataset.itemName;
@@ -78,9 +80,11 @@ function confirmAddToCart() {
     var modalInstance = new bootstrap.Modal(modalElement);
     modalInstance.hide();
     modalElement.classList.remove("show");
-    modalElement.style.display = "none"; // 隐藏 modal
-    document.body.classList.remove("modal-open"); // 移除 modal 打开时 body 上的类
-    document.querySelector(".modal-backdrop").remove(); // 移除背景
+    modalElement.style.display = "none";
+    document.body.classList.remove("modal-open");
+    document.querySelector(".modal-backdrop").remove();
+
+    window.location.reload();
 }
 
 
@@ -161,21 +165,28 @@ function showCart() {
         itemRow.classList.add('d-flex', 'align-items-center', 'justify-content-center', 'mb-3');
         // // <img src="{{ asset('storage/photos/${item.photo}') }}"
         itemRow.innerHTML = `
+           <div class="d-flex align-items-center">
+    <img src="${assetBaseUrlShowCart}/${item.photo}" class="mr-5" style="width: 20%;">
+    <div class="mr-5">
+        <div>${item.name}</div>
+        <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
-               <img src="${assetBaseUrlShowCart}/${item.photo}" style="width: 20%;" class="mr-5">
-                <div class="mr-5">
-                    <div>${item.name}</div>
-                    <div>$${item.price} x 
-                        <button type="button" class="btn btn-sm btn-outline-secondary rounded-button" onclick="decrementItem(${index})">-</button>
-                        <span class="number-span fs-20">${item.quantity}</span>
-                        <button type="button" class="btn btn-sm btn-outline-secondary rounded-button" onclick="incrementItem(${index})">+</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary rounded-button" onclick="removeItem(${index})">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
+                $${item.price} x 
             </div>
-            <div class="fw-bold">$${(item.price * item.quantity).toFixed(0)}</div>
+            <div>
+            <button type="button" class="btn btn-sm btn-outline-secondary rounded-button mx-3" style="margin-left: 10px;" onclick="decrementItem(${index})">-</button>
+<span class="number-span fs-20 mx-2" style="margin-top: 5px;">${item.quantity}</span>
+<button type="button" class="btn btn-sm btn-outline-secondary rounded-button mx-3" style="margin-left: 10px;" onclick="incrementItem(${index})">+</button>
+<button type="button" class="btn btn-sm btn-outline-secondary rounded-button mx-3" style="margin-left: 10px;" onclick="removeItem(${index})">
+    <i class="fa fa-trash"></i>
+</button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div class="fw-bold" style="padding-top: 5px;">$${(item.price * item.quantity).toFixed(0)}</div>
+
         `;
         cartContents.appendChild(itemRow);
         total += item.price * item.quantity;
@@ -197,9 +208,9 @@ function closeModal() {
     var modalInstance = new bootstrap.Modal(modalElement);
     modalInstance.hide();
     modalElement.classList.remove("show");
-    modalElement.style.display = "none"; // 隐藏 modal
-    document.body.classList.remove("modal-open"); // 移除 modal 打开时 body 上的类
-    document.querySelector(".modal-backdrop").remove(); // 移除背景
+    modalElement.style.display = "none";
+    document.body.classList.remove("modal-open");
+    document.querySelector(".modal-backdrop").remove();
 }
 
 
@@ -208,8 +219,8 @@ function closeCartModal() {
     var modalInstance = new bootstrap.Modal(modalElement);
     modalInstance.hide();
     modalElement.classList.remove("show");
-    modalElement.style.display = "none"; // 隐藏 modal
-    document.body.classList.remove("modal-open"); // 移除 modal 打开时 body 上的类
-    document.querySelector(".modal-backdrop").remove(); // 移除背景
+    modalElement.style.display = "none";
+    document.body.classList.remove("modal-open");
+    document.querySelector(".modal-backdrop").remove();
 }
 

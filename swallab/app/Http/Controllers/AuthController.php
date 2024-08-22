@@ -23,10 +23,12 @@ class AuthController extends Controller
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
-
+        // Auth::attempt($credentials) 是 Laravel 的一個方便方法，用於進行用戶認證（登入）的操作。這個方法接受一個包含憑證（如 email 和 password）的數組，然後檢查這些憑證是否與資料庫中的用戶資料匹配。如果匹配，則表示用戶通過了身份驗證，並且會自動登入該用戶。
         if (Auth::attempt($credentials)) {
+            // $request->session()->regenerate(); 是一個常見的安全措施，特別是在用戶登入操作中，旨在防止會話固定攻擊，保護用戶的會話資料不被攻擊者利用。
             $request->session()->regenerate();
 
+            // Auth::user() 會返回目前經過認證並且登入的用戶實例。這個實例是根據用戶的 session 或 token 驗證的。如果用戶尚未登入，Auth::user() 會返回 null。
             $user = Auth::user();
 
             if ($user->role == 'admin') {
@@ -37,7 +39,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => __('auth.failed'),
+            'email' => '帳號或密碼錯誤!',
         ])->onlyInput('email');
     }
 
@@ -48,7 +50,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|in:admin,member',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,avif|max:2048',
         ]);
 
         $avatarPath = null;
@@ -113,7 +115,7 @@ class AuthController extends Controller
             if ($user->role == 'admin') {
                 return redirect('/admin');
             } else {
-                return redirect('/member');
+                return redirect('/headpage/headpage');
             }
         } else {
             return back()->withErrors(['email' => [__($status)]]);

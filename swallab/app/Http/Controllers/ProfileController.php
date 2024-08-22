@@ -75,33 +75,32 @@ class ProfileController extends Controller
 
     public function updateCreditCard(Request $request)
     {
-        $request->validate([
-            'card_number' => 'required|string|max:19',
-            'expiry_date' => 'required|string|max:5',
-            // 你可以根據需要添加更多驗證規則
-        ]);
-
         $user = Auth::user();
 
-        $cards = [
-            'credit_card_1' => $user->credit_card_1,
-            'credit_card_2' => $user->credit_card_2,
-            'credit_card_3' => $user->credit_card_3,
-        ];
+    
+        $creditCards = [];
+        if ($user->credit_card_1) $creditCards[] = $user->credit_card_1;
+        if ($user->credit_card_2) $creditCards[] = $user->credit_card_2;
+        if ($user->credit_card_3) $creditCards[] = $user->credit_card_3;
 
-        // 找到第一個空的信用卡欄位並儲存
-        foreach ($cards as $key => $value) {
-            if (is_null($value)) {
-                $user->{$key} = $request->card_number . '|' . $request->expiry_date;
-                $user->save();
-                return response()->json(['message' => 'Credit card saved successfully.']);
-            }
+        if (count($creditCards) >= 3) {
+            return response()->json(['success' => false, 'message' => '最多只能儲存三張信用卡']);
         }
 
-        return response()->json(['error' => 'You can only save up to 3 credit cards.'], 400);
+        $newCard = $request->input('card_number') . '|' . $request->input('expiry_date') . '|' . $request->input('cardholder_name');
+
+        if (!$user->credit_card_1) {
+            $user->credit_card_1 = $newCard;
+        } elseif (!$user->credit_card_2) {
+            $user->credit_card_2 = $newCard;
+        } elseif (!$user->credit_card_3) {
+            $user->credit_card_3 = $newCard;
+        }
+
+        $user->save();
+
+        return response()->json(['success' => true]);
     }
-
-
     public function deleteCreditCard(Request $request)
     {
         $user = Auth::user();

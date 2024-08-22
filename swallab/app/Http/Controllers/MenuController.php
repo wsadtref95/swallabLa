@@ -19,8 +19,14 @@ class MenuController extends Controller
 
     public function index()
     {
-        $restaurants = restaurant::all();
+        $restaurants = restaurant::where('r_id', 1)->get();
         return view('/restaurant/detail', compact('restaurants'));
+    }
+
+    public function index2()
+    {
+        $restaurants = restaurant::where('r_id', 2)->get();
+        return view('/restaurant/detail2', compact('restaurants'));
     }
 
 

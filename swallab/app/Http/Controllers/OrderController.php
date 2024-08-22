@@ -71,7 +71,7 @@ class OrderController extends Controller
             'cart_items' => 'required|json', 
         ]);
 
-        // 创建订单
+        
         $order = Order::create([
             'user_id' => Auth::id(),
             'utensils' => $request->utensils,

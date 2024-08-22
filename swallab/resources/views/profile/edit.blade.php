@@ -109,7 +109,7 @@
                         <div class="row">
                             <div class="ml-5 d-flex">
                                 <img id="avatar-display"
-                                    src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('/images/other/default-avatar.jpg') }}"
+                                    src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('/images/other/deav.jpg') }}"
                                     style="width: 180px; height: auto; cursor: pointer;">
                                 <input type="file" id="avatar-input" name="avatar" style="display: none;">
                                 <div class="col-md-5 ml-5 ">
@@ -129,9 +129,11 @@
                                     </div>
                                 </div>
                                 <div class="col-md-7 ml-5 ">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="請輸入電話" class="form-control" id="phone"
-                                            name="phone" value="{{ $user->phone }}">
+                                    <div class="form-group row">
+                                        <div class="col-md-9">
+                                            <input type="text" placeholder="請輸入電話" class="form-control" id="phone"
+                                                name="phone" value="{{ $user->phone }}">
+                                        </div>
                                     </div>
 
                                     {{-- <button class="d-flex delete">刪除帳戶</button> --}}
@@ -145,14 +147,15 @@
                             </div>
                         </div>
                         <div style="display: inline" class="ml-5">
-                            <button type="submit" class="delete ml-1 mx-5">完成編輯</button>
+                            <button type="submit" class="delete ml-1 mx-5 btn">完成編輯</button>
 
                         </div>
-                        <div>
 
-                        </div>
                     </form>
-
+                    {{-- <div>
+                        <button class="d-flex delete" data-toggle="modal"
+                            data-target="#changePasswordModal">更改密碼</button>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -197,11 +200,11 @@
                 </button>
                 <!-- 下拉選單 -->
                 <div class="dropdown">
-                    <button class="delete dropdown-toggle" type="button" id="savedCardsDropdown"
+                    <button class="delete dropdown-toggle btn" type="button" id="savedCardsDropdown"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         查看信用卡
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="savedCardsDropdown" id="savedCardsContainer">
+                    <div style="background-color:#eee9d5" class="dropdown-menu" aria-labelledby="savedCardsDropdown" id="savedCardsContainer">
                         <!-- 信用卡選項會動態生成 -->
                     </div>
                 </div>
@@ -236,7 +239,8 @@
                         </div>
                         <div class="form-group">
                             <label>持卡人姓名</label>
-                            <input type="text" class="form-control" placeholder="請輸入姓名" required>
+                            <input type="text" id="cardholderNameInput" class="form-control" placeholder="請輸入姓名"
+                                required>
                         </div>
                         <div class="modal-footer">
                             <button type="button" style="color: white; background-color:rgb(229,166,122)"
@@ -249,7 +253,8 @@
     </div>
 
 
-    <button class="d-flex delete" style="position: absolute; left:903px; bottom:285px" data-toggle="modal" data-target="#changePasswordModal">更改密碼</button>
+    <button class="d-flex delete btn" style="position: absolute; left:900px; bottom:285px" data-toggle="modal"
+        data-target="#changePasswordModal">更改密碼</button>
     <!-- 更改密碼model -->
     <div class="modal fade" id="changePasswordModal">
         <div class="modal-dialog">
@@ -327,6 +332,7 @@
         function saveCreditCard() {
             let creditCardNumber = document.getElementById('creditCardInput').value;
             let expiryDate = document.getElementById('expiryDateInput').value;
+            let cardholderName = document.getElementById('cardholderNameInput').value;
 
             if (creditCardNumber && expiryDate) {
                 fetch('{{ route('profile.updateCreditCard') }}', {
@@ -337,7 +343,8 @@
                         },
                         body: JSON.stringify({
                             card_number: creditCardNumber,
-                            expiry_date: expiryDate
+                            expiry_date: expiryDate,
+                            cardholder_name: cardholderName
                         })
                     })
                     .then(response => response.json())
@@ -389,15 +396,20 @@
 
             cards.forEach((card, index) => {
                 if (card) {
-                    let [number, expiry] = card.split('|');
+                    let [number, expiry, cardholder] = card.split('|');
+
+                    // 如果cardholder是undefined，則使用預設值
+                    cardholder = cardholder || '未提供';
+
                     let cardElement = document.createElement('div');
                     cardElement.className = 'card mb-3';
                     cardElement.style = 'width: 18rem;';
                     cardElement.innerHTML = `
-                <div class="card-body">
+                <div class="card-body" style="background-color: #eee9d5">
                     <h5 class="card-title">信用卡 ${index + 1}</h5>
-                    <p class="card-text"><strong>信用卡號碼:</strong> ${number}</p>
-                    <p class="card-text"><strong>到期日:</strong> ${expiry}</p>
+                    <p class="card-text"><strong>信用卡號碼:</strong> ${number || '未提供'}</p>
+                    <p class="card-text"><strong>到期日:</strong> ${expiry || '未提供'}</p>
+                    <p class="card-text"><strong>持卡人姓名:</strong> ${cardholder}</p>
                     <button class="btn btn-danger" onclick="deleteCreditCard(${index})">刪除</button>
                 </div>
             `;
@@ -549,10 +561,10 @@
 
 
         function handleChangePassword(event) {
-            event.preventDefault(); 
+            event.preventDefault();
 
             const form = event.target;
-            const formData = new FormData(form); 
+            const formData = new FormData(form);
 
             fetch('{{ route('profile.changePassword') }}', {
                     method: 'POST',
@@ -566,7 +578,7 @@
                     if (data.success) {
                         alert(data.success);
                         window.location.reload()
-                        
+
                         const modal = document.getElementById('changePasswordModal');
                         modal.classList.remove('show');
                         modal.style.display = 'none';
@@ -584,7 +596,7 @@
                 })
                 .catch(error => console.error('Error:', error));
 
-            return false; 
+            return false;
         }
     </script>
 </body>

@@ -18,5 +18,6 @@ class IsAdmin
 
         Log::warning('User is not admin or not authenticated');
         return redirect('http://localhost/swallab/Swallab/backstage/new_oder.html');
+        // ->away('http://swallab/Swallab/backstage/new_oder.html');
     }
 }

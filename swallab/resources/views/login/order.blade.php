@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('title', '會員中心->我的訂單')
-
+{{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
 @section('content')
     <style>
         #cart-container .cart-item {
@@ -49,6 +50,35 @@
         #num {
             position: absolute;
             right: 355px;
+        }
+
+        /* 四種顏色轉圈圈動畫的 CSS */
+        #myLoading {
+            display: none;
+            /* 默認隱藏 */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1055;
+            /* 高於 modal 的 z-index */
+        }
+
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+            border-width: 0.3rem;
+            border-style: solid;
+            border-color: #007bff #28a745 #ffc107 #dc3545;
+            /* 四種顏色 */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
     <div class="container">
@@ -101,6 +131,7 @@
                         </script>
                     @endif
                 </div>
+
                 <div class="container my-5">
                     <div class="row mb-3">
                         <div class="col-md-6">
@@ -164,7 +195,9 @@
                             <input type="hidden" name="cart_items" id="cartItemsInput">
                             <input type="hidden" name="total" id="totalInput">
 
-                            <button type="submit" class="btn btn-warning mt-5">確認付款</button>
+                            <button type="submit" class="btn btn-warning mt-5" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">確認付款</button>
+
                         </form>
                     </div>
                 </div>
@@ -174,6 +207,13 @@
         </div>
     </div>
     </div>
+    <div id="myLoading"
+        style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1055;">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden"></span>
+        </div>
+    </div>
+
 
     {{-- <script src="{{ asset('js/order.js') }}"></script> --}}
     {{-- <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script> --}}
@@ -364,6 +404,29 @@
 
         creditCardSelect.addEventListener('change', function() {
             console.log('選擇的信用卡:', creditCardSelect.value);
+        });
+
+
+        document.getElementById('orderForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // 阻止表单的默认提交行为
+
+            // 显示加载动画
+            const loadingElement = document.getElementById('myLoading');
+            if (loadingElement) {
+                loadingElement.style.display = 'block';
+            }
+
+            // 模拟延迟
+            setTimeout(function() {
+                // 隐藏加载动画
+                if (loadingElement) {
+                    loadingElement.style.display = 'none';
+                }
+
+                // 手动提交表单
+                event.target.submit();
+
+            }, 3000); // 延迟 3 秒钟 (3000 毫秒)
         });
     </script>
 

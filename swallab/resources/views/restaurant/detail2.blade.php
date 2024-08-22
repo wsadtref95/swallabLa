@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<link rel="stylesheet" href="{{ asset('css/detailxi.css') }}">
 @push('styles')
     {{-- @include('layouts.map') --}}
 @endpush
@@ -35,36 +35,12 @@
 
 
         // // 或者你可以遍歷並顯示每個餐點
-        // meals.forEach(function(meal) {
-        //     console.log('Name:', meal.meals_name);
-        //     console.log('Photo:', meal.photo);
-        //     console.log('Price:', meal.price);
-        // });
+        meals.forEach(function(meal) {
+            console.log('Name:', meal.meals_name);
+            console.log('Photo:', meal.photo);
+            console.log('Price:', meal.price);
+        });
 
-
-
-
-
-
-
-        function showCart() {
-            const body = document.body;
-            if (!body.classList.contains('modal-open')) {
-                const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-                body.style.paddingRight = `${scrollbarWidth}px`;
-            }
-
-            const modal = new bootstrap.Modal(document.getElementById('cartModal'));
-            modal.show();
-        }
-
-        function closeCartModal() {
-            const body = document.body;
-            body.style.paddingRight = '';
-
-            const modal = bootstrap.Modal.getInstance(document.getElementById('cartModal'));
-            modal.hide();
-        }
 
         function filterItems(classId) {
             // 先隱藏所有餐點
@@ -101,6 +77,7 @@
         }
 
 
+        //青菜
         function veg() {
             let veg = document.getElementById("veg")
             let titleName = document.getElementById("titleName")
@@ -109,7 +86,7 @@
         }
 
 
-
+        //餃類
         function dum() {
             let dum = document.getElementById("dum")
             let titleName = document.getElementById("titleName")
@@ -118,7 +95,7 @@
         }
 
 
-
+        //丸子類
         function ball() {
             let ball = document.getElementById("ball")
             let titleName = document.getElementById("titleName")
@@ -146,8 +123,6 @@
 
 
         }
-
-
     </script>
     <script src="{{ asset('/js/cart.js') }}"></script>
 @endpush
@@ -161,15 +136,10 @@
         .cart {
             top: -10px;
             right: -10px;
-
+            width: ;
         }
-
-        .icon-shopping {
+        .icon-shopping{
             top: 400px;
-        }
-
-        button:focus {
-            outline: none;
         }
     </style>
     <div class="container">
@@ -179,8 +149,8 @@
                     <div id="googlemap"></div>
                 </div>
             </div>
-            <img style="height: 400px; width: 1100px ; border: none; background-color: transparent;"
-                src="{{ asset('images/other/qh.jpg') }}" alt="">
+            <img style="height: 400px; width: 1100px ; border: none; background-color: transparent;" src="{{ asset('images/other/wuma.jpg') }}"
+                alt="">
             {{-- <div class="col-md-4">
                 <div id="sidebar">
                     <button id="currentLocationButton" onclick="goToCurrentLocation()">顯示我的位置</button>
@@ -202,13 +172,12 @@
                 <div class="hotpot">
                     <br>
                     <br>
-                    <div style="font-size: 30px; font-weight: bold;">青花驕 - 公益店</div>
+                    <div style="font-size: 30px; font-weight: bold;">屋馬燒肉 中港店</div>
                     <div class="ml-5" style="font-size: 25px; font-weight: bold;">
-                        4.8分 <span style="font-size: 20px">(33)</span>
+                        4.8分 <span style="font-size: 20px">(1058)</span>
                     </div>
-                    <div class="ml-5 mt-2">均消200-400</div>
-                    <span class="mt-2">地址：40844台中市南屯區公益路二段722號
-                    </span>
+                    <div class="ml-5 mt-2">均消800-1200</div>
+                    <span class="mt-2">地址：407台中市西屯區臺灣大道三段300號</span>
                     <button class="score" data-toggle="modal" data-target="#addCartModal">留下評論</button>
                 </div>
             </div>
@@ -216,7 +185,7 @@
             <div class="col-6">
                 <br>
                 <iframe style="height: 350px"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.589617096072!2d120.62840081164475!3d24.15104617830902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d77ced333f7%3A0x5f6fe8df82767c!2z6Z2S6Iqx6amV6bq76L6j6Y2LIOWPsOS4reWFrOebiuW6lw!5e0!3m2!1szh-TW!2stw!4v1723966866765!5m2!1szh-TW!2stw"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.170276365837!2d120.64196677603175!3d24.165760372702444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d95983f88e5%3A0xc3cf16f793df646b!2z5bGL6aas54eS6IKJIOS4rea4r-W6lw!5e0!3m2!1szh-TW!2stw!4v1723993477190!5m2!1szh-TW!2stw"
                     width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
@@ -226,7 +195,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="scoreLabel">無老鍋-公益店</h5>
+                        <h5 class="modal-title" id="scoreLabel">茶六-公益店</h5>
                         <button type="button" class="close" data-dismiss="modal">
                             <span>x</span>
                         </button>
@@ -262,7 +231,7 @@
                 <!-- 側邊欄 -->
                 <div class="col-2 custom-ul sticky-top">
                     <div class="mb-2 mt-3" onclick="allfood()">
-                        <a  onclick="filterItems(0)"><img src="{{ asset('images/other/hot_2.png') }}"
+                        <a href="#all" onclick="filterItems(0)"><img src="{{ asset('images/other/hot_2.png') }}"
                                 style="width: 150px;" alt=""></a>
                         <li id="allfood">全部餐點</li>
                     </div>
@@ -272,27 +241,26 @@
                         <li id="limit">限時優惠</li>
                     </div>
                     <div class="mb-2 mt-3" onclick="veg()">
-                        <a  onclick="filterItems(19)"><img
-                                src="{{ asset('images/other/vegetable_6.jpeg') }}" style="width: 100px;" alt=""></a>
-                        <li id="veg">青菜</li>
+                        <a href="#vegetable" onclick="filterItems(20)"><img src="{{ asset('images/other/beef.jpg') }}"
+                                style="width: 100px;" alt=""></a>
+                        <li id="veg">牛肉</li>
                     </div>
 
 
                     <div class="mt-2" onclick="dum()">
-                        <a  onclick="filterItems(18)"><img src="{{ asset('images/other/dumpling.png') }}"
+                        <a href="#dumpling" onclick="filterItems(22)"><img src="{{ asset('images/other/pork.png') }}"
                                 style="width: 100px; border: none; background-color: transparent;" alt=""></a>
-                        <li id="dum">餃類</li>
+                        <li id="dum">豬肉</li>
                     </div>
                     <div class="mt-2" onclick="ball()">
-                        <a  onclick="filterItems(15)"><img
-                                src="{{ asset('images/other/porkball_1.jpg') }}" style="width: 100px;"
-                                alt=""></a>
-                        <li id="ball">丸子</li>
+                        <a href="#porkball" onclick="filterItems(28)"><img src="{{ asset('images/other/drink.png') }}"
+                                style="width: 100px;" alt=""></a>
+                        <li id="ball">飲料</li>
                     </div>
                     <div class="mt-2 mb-5" onclick="meal()">
-                        <a  onclick="filterItems(17)"><img src="{{ asset('images/other/rice.png') }}"
+                        <a href="#rice" onclick="filterItems(26)"><img src="{{ asset('images/other/des.png') }}"
                                 style="width: 80px;" alt=""></a>
-                        <li id="meal">主食</li>
+                        <li id="meal">甜點</li>
                     </div>
                 </div>
                 <!-- 餐點 -->
@@ -315,7 +283,7 @@
                         <!-- {{-- 預設顯示的餐點，這裡可以顯示所有餐點或者某個範例 --}} -->
                         @foreach ($restaurants as $restaurant)
                             <div class="col-4 mb-4 restaurant-item" data-class="{{ $restaurant->class }}">
-                                <img class="ml-3 myimg"
+                                <img style="width: 224px; height: 224px; object-fit: cover;" class="ml-3 myimg"
                                     src="{{ url('http://localhost/swallabLa/swallab/storage/app/public/photos/' . $restaurant->photo) }}"
                                     alt="{{ $restaurant->meals_name }}">
                                 <div class="name">{{ $restaurant->meals_name }}</div>
@@ -433,8 +401,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button id="cc" type="button" class="btn"
-                                onclick="confirmAddToCart()">確定</button>
+                            <button type="button" class="btn" onclick="confirmAddToCart()">確定</button>
                         </div>
                     </div>
                 </div>
@@ -446,7 +413,7 @@
             <!-- 購物車總覽modal -->
             <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartLabel" aria-hidden="true"
                 data-bs-backdrop="static">
-                <div class="modal-dialog modal-lg">
+                <div class="modal-dialog">
                     <div style="background-color: #EEE9D5;" class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="cartLabel">購物車</h5>
