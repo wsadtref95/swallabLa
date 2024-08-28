@@ -61,29 +61,27 @@ class RestaurantController extends Controller
 
     public function index($id)
     {
-        $meals = Meal::with('restaurant')->where('r_id', $id)->get(); 
+        $meals = Meal::with('restaurant')->where('r_id', $id)->get();
         $restaurants = $meals->pluck('restaurant')->unique();
-    
+
         return view('restaurant.detail', compact('meals', 'restaurants'));
-        
     }
 
     public function show($id = null)
-{
-    if ($id) {
-        // 如果提供了ID，顯示指定餐廳的菜單詳情
-        $meals = Meal::with('restaurant')->where('r_id', $id)->get(); 
-        $restaurant = Restaurant::findOrFail($id);
-        
-        return view('restaurant.detail', compact('meals', 'restaurant'));
-    } else {
-        // 如果沒有提供ID，顯示所有與admin用戶關聯的餐廳
-        $restaurants = Restaurant::whereHas('user', function ($query) {
-            $query->where('role', 'admin');
-        })->get();
+    {
+        if ($id) {
+            // 如果提供了ID，顯示指定餐廳的菜單詳情
+            $meals = Meal::with('restaurant')->where('r_id', $id)->get();
+            $restaurant = Restaurant::findOrFail($id);
 
-        return view('restaurant.homepage', compact('restaurants'));
+            return view('restaurant.detail', compact('meals', 'restaurant'));
+        } else {
+            // 如果沒有提供ID，顯示所有與admin用戶關聯的餐廳
+            $restaurants = Restaurant::whereHas('user', function ($query) {
+                $query->where('role', 'admin');
+            })->get();
+
+            return view('restaurant.homepage', compact('restaurants'));
+        }
     }
-}
-
 }

@@ -281,7 +281,7 @@
 
             dateSelect.selectedIndex = 0;
         })
-        const assetBaseUrlShowCart = "{{ asset('storage/photos') }}";
+        const assetBaseUrlShowCart = "{{ asset('storage') }}";
         console.log(localStorage.getItem('cart'));
         // console.log('ordercart.js loaded');
         document.addEventListener('DOMContentLoaded', function() {

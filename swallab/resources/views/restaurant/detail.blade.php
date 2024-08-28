@@ -8,8 +8,8 @@
 @push('scripts')
     {{-- @include('layouts.map') --}}
     <script>
-        const assetBaseUrl = "{{ asset('storage/photos') }}";
-        const assetBaseUrlShowCart = "{{ asset('storage/photos') }}";
+        const assetBaseUrl = "{{ asset('/storage') }}";
+        const assetBaseUrlShowCart = "{{ asset('storage') }}";
         // 把 Blade 變數轉換為 JSON 格式
         // var restaurants = @json($restaurants);
 
