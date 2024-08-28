@@ -13,6 +13,8 @@ use App\Http\Controllers\FoodNotesController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\RcommentController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\MealController;
 
 
 Route::get('/', function () {
@@ -97,7 +99,7 @@ Route::view('/myHistory/myOrder', 'myHistory/myOrder');
 
 // ===============================後台===============================
 
-Route::view('/backstage/management_menu1', 'backstage/management_menu1');
+Route::view('/backstage/management_menu1', 'backstage/management_menu1')->name('backstage.menu');
 Route::view('/backstage/management_menu2', 'backstage/management_menu2');
 Route::post('/backstage/management_menu1/store', [MenuController::class, 'store'])->name('menu.store');
 Route::view('/backstage/new_oder', 'backstage/new_oder');
@@ -137,5 +139,24 @@ Route::post('/rcomments', [RcommentController::class, 'store'])->name('rcomment.
 Route::post('/get-pickup-time', [OrderController::class, 'getPickupTime']);
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
-// ====================================
+// ================================================================================
 Route::view('/aa','aa');
+Route::get('/restaurant/homepage', [RestaurantController::class, 'showRestaurants'])->name('restaurant.homepage');
+
+// ==========================================================================
+Route::view('/bb', 'bb');
+Route::post('/restaurant/store', [RestaurantController::class, 'store'])->name('restaurant.store');
+
+// ========================================================================================
+Route::get('/restaurant/{id}', [RestaurantController::class, 'index'])->name('restaurant.detail');
+// Route::get('/restaurant/{id}', [RestaurantController::class, 'showRestaurants'])->name('restaurant.detail');
+
+
+// ============================================================
+Route::view('/backstage/meals', 'restaurant/meals');
+Route::post('/meals', [MealController::class, 'store'])->name('meals.store');
+
+
+
+// Route::get('/restaurants', [RestaurantController::class, 'show'])->name('restaurants.homepage');
+// Route::get('/restaurant/{id}', [RestaurantController::class, 'show'])->name('restaurant.detail');

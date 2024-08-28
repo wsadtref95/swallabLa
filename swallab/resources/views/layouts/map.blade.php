@@ -159,6 +159,7 @@
                         location: userLocation,
                         radius: '8000',
                         type: ['restaurant'],
+                        // keyword:['青花驕','茶六'],
                     };
 
                     service = new google.maps.places.PlacesService(map);
@@ -332,6 +333,10 @@
             '夏慕尼新香榭鐵板燒 台中大隆店': {
                 url: 'https://example.com',
                 comment: `<br><span class="stars">★★★★★</span><span>(742)</span><br>"夏慕尼 大膽顛覆傳統鐵板燒的老式印象 將法式料理及Lounge Bar 的時尚元素融入鐵板料理 設計出一道道精緻小巧的餐點 法式浪漫風情營造出獨特迷人的用餐環境氛圍 絢爛的水晶燈、悅耳的鋼琴聲、美味的法式鐵板饗宴 屬於情人的浪漫夜正要開始……"<br><br><button id="btn" onclick="window.location.href='https://example.com'">前往頁面</button>`
+            },
+            '青花驕麻辣鍋 台中公益店': {
+                url: 'http://localhost/swallabLa/swallab/public/restaurant/detail',
+                comment: `<br><span class="stars">★★★★★</span><span>(742)</span><br>"青花驕 · 我辣故我在 · 真食好料 · 尋找驕點 "<br><br><button id="btn" onclick="window.location.href='http://localhost/swallabLa/swallab/public/restaurant/detail'">前往頁面</button>`
             },
         };
 

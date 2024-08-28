@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
-            $table->decimal('r_id', 8, 0);
-            $table->decimal('class', 8, 0);
-            $table->string('meals_name');
-            $table->decimal('price', 8, 0);
-            $table->string('photo');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('name')->nullable(); 
+            $table->string('photo')->nullable();
+            $table->string('address')->nullable(); 
+            $table->string('phone')->nullable();
+            $table->decimal('average_price', 8, 0)->nullable();
+            $table->unsignedTinyInteger('class')->nullable(); 
             $table->timestamps();
         });
     }

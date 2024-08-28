@@ -59,6 +59,11 @@ class User extends Authenticatable
         ]);
     }
 
+    public function restaurant()
+    {
+        return $this->hasOne(Restaurant::class);
+    }
+
     public function addCreditCard($creditCardData)
     {
         if (is_null($this->credit_card_1)) {

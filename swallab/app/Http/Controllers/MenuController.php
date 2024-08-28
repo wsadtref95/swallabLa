@@ -6,21 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\Menu;
 use App\Models\restaurant;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Meal;
 
 class MenuController extends Controller
 {
 
 
-    // public function index()
-    // {
-    //     $menus = Menu::all();
-    //     return view('/restaurant/detail', compact('menus'));
-    // }
-
     public function index()
     {
-        $restaurants = restaurant::where('r_id', 1)->get();
-        return view('/restaurant/detail', compact('restaurants'));
+        $meals = Meal::with('restaurant')->where('r_id', 4)->get(); 
+        $restaurants = $meals->pluck('restaurant')->unique();
+        return view('restaurant.detail', compact('meals', 'restaurants'));
     }
 
     public function index2()

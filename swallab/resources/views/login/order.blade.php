@@ -408,25 +408,25 @@
 
 
         document.getElementById('orderForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // 阻止表单的默认提交行为
+            event.preventDefault(); 
 
-            // 显示加载动画
+            
             const loadingElement = document.getElementById('myLoading');
             if (loadingElement) {
                 loadingElement.style.display = 'block';
             }
 
-            // 模拟延迟
+         
             setTimeout(function() {
-                // 隐藏加载动画
+               
                 if (loadingElement) {
                     loadingElement.style.display = 'none';
                 }
 
-                // 手动提交表单
+                
                 event.target.submit();
 
-            }, 3000); // 延迟 3 秒钟 (3000 毫秒)
+            }, 3000); 
         });
     </script>
 

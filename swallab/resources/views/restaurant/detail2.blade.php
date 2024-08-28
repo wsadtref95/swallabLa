@@ -315,52 +315,7 @@
 
 
                 <!-- 留言區 -->
-                <div class="ml-3 mb-4" style="font-size: 30px; font-weight: bold;">大家怎麼說</div>
-                <div class="row">
-                    <div class="col-3">
-                        <img class="ml-2" src="{{ asset('images/root/LOGO.jpg') }}" style="width: 150px;">
-                    </div>
-                    <div class="col-9">
-                        <div>
-                            一進門椒麻香氣撲鼻而來，接待員親切的接待⋯雖然第一次，但餐點沒讓人失望⋯我們點了雙人套餐，酸菜白肉（微酸而不嗆）+麻辣（麻而不辣）湯底真的絕配，也適合孩子，原本還擔心吃不飽，結果～飽到吃不完。白飯粒粒分明是我愛的、鮮蝦滑蝦子多看得到、手工麵Q彈量多、油條適合麻辣湯底、鴨血豆腐品質保證，青花驕特調烏梅汁搭配碎冰真的驚艷⋯唇齒留香讓人回味
-                        </div>
-                        <div class="date">2024/5/1</div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-3">
-                        <img class="ml-2" src="{{ asset('images/root/LOGO.jpg') }}" style="width: 150px;">
-                    </div>
-                    <div class="col-9">
-                        <div>
-                            好吃平日雙人套餐優惠
-                            份量多 還吃不完
-                            沒吃完會主動詢問要不要打包👍
-                            吃麻辣鍋湯底有鴨血豆腐
-                            外帶還另外給一包鴨血豆腐
-                            超貼心、餐點又好吃
-                            便宜！真的大推
-                            第一次吃很稱讚👏
-                        </div>
-                        <div class="date" style="margin-top: 60px;">2024/6/1</div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row hidden" id="hidden-Comment" style="display: none;">
-                    <div class="col-3">
-                        <img class="ml-2" src="{{ asset('images/root/LOGO.jpg') }}" style="width: 150px;">
-                    </div>
-                    <div class="col-9">
-                        <div>
-                            第二次來用餐，3種部位的牛肉品質都不錯，且份量足，吃得很開心。海鮮的部分生蠔與干貝已說明不可生食，烹煮後相當甘甜嫩滑，也很好吃，不過CP值略低。每人有收取鍋底費用，最後的打包誠意十足，可以回家後繼續享用。整體而言是值得再訪的餐廳。
-                        </div>
-                        <div class="date" style="margin-top: 60px;">2024/8/1</div>
-                    </div>
-                </div>
-                <button class="score" style="margin-left: auto; margin-top: 10px;"
-                    onclick="showMore('hidden-Comment')">顯示更多</button>
-            </div>
+               
 
 
             <!-- 購物車modal -->

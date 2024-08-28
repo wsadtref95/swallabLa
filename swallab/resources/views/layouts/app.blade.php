@@ -79,7 +79,7 @@
                     <div class="nav-item col-6">
                         <a style="color:#8B4513;font-weight: bold;text-decoration: none;" id="rest"
                             class="nav-link d-block nav_mainbtn"
-                            href="{{ url('http://localhost/swallabLa/swallab/public/restaurant/detail') }}">找餐廳</a>
+                            href="{{ url('http://localhost/swallabLa/swallab/public/restaurant/homepage') }}">找餐廳</a>
                     </div>
                     <div style="color:#8B4513;font-weight: bold;text-decoration: none;" class="nav-item col-6">
                         <a id="resta" class="nav-link d-block nav_mainbtn"
@@ -94,8 +94,8 @@
                         <div class="d-block position-relative m-0 p-0 col">
                             <div style="display: flex;" class="row">
                                 <div class="col-6">
-                                    <input type="text" id="myInput" onclick="myFunction()" placeholder="點擊我"
-                                        class="form-control m-0">
+                                    <input type="text" id="myInput" onclick="toggleDropdown('myDropdown')"
+                                        placeholder="想找什麼餐廳?" class="form-control m-0">
                                     <div id="myDropdown" class="dropdown-content"
                                         style="display: none; position: absolute;">
                                         <a href="#cate_no" onclick="fillInput('null')"
@@ -111,18 +111,20 @@
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <input type="text" id="myInput2" onclick="myFunction2()" placeholder="點擊我"
-                                        class="form-control m-0">
+                                    <input type="text" id="myInput2" onclick="toggleDropdown('myDropdown2')" 
+                                        placeholder="點擊或輸入地區" class="form-control m-0">
                                     <div id="myDropdown2" class="dropdown-content"
                                         style="display: none; position: absolute;">
                                         <a href="#loc_no" onclick="fillInput2('null')"
-                                            class="position-relative">不挑地區</a>
+                                            class="position-relative">全台中市</a>
                                         <a href="#loc_Taichung" onclick="fillInput2('台中市')"
-                                            class="position-relative">台中市</a>
-                                        <a href="#loc_1" onclick="fillInput2('選項2')"
-                                            class="position-relative">選項2</a>
-                                        <a href="#loc_2" onclick="fillInput2('選項3')"
-                                            class="position-relative">選項3</a>
+                                            class="position-relative">中區</a>
+                                        <a href="#loc_1" onclick="fillInput2('')"
+                                            class="position-relative">東區</a>
+                                        <a href="#loc_2" onclick="fillInput2('')"
+                                            class="position-relative">北區</a>
+                                        <a href="http://localhost/swallabLa/swallab/public/aa" onclick="fillInput2('')"
+                                            class="position-relative">附近餐廳</a>
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +173,39 @@
             </div>
         </div>
     </nav>
+    <script>
+        function toggleDropdown(dropdownId) {
+            var dropdown = document.getElementById(dropdownId);
+            if (dropdown.style.display === "none" || dropdown.style.display === "") {
+                dropdown.style.display = "block";
+            } else {
+                dropdown.style.display = "none";
+            }
+        }
 
+        function fillInput(value) {
+            document.getElementById('myInput').value = value;
+            toggleDropdown('myDropdown');
+        }
+
+        function fillInput2(value) {
+            document.getElementById('myInput2').value = value;
+            toggleDropdown('myDropdown2');
+        }
+
+        // Optional: Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('#myInput') && !event.target.matches('#myInput2')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 
     <!-- NAV_end -->
 
@@ -198,5 +232,39 @@
     {{-- <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script> --}}
     @stack('scripts')
 </body>
+
+<script>
+    function toggleDropdown(dropdownId) {
+        var dropdown = document.getElementById(dropdownId);
+        if (dropdown.style.display === "none" || dropdown.style.display === "") {
+            dropdown.style.display = "block";
+        } else {
+            dropdown.style.display = "none";
+        }
+    }
+
+    function fillInput(value) {
+        document.getElementById('myInput').value = value;
+        toggleDropdown('myDropdown');
+    }
+
+    function fillInput2(value) {
+        document.getElementById('myInput2').value = value;
+        toggleDropdown('myDropdown2');
+    }
+
+    // Optional: Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('#myInput') && !event.target.matches('#myInput2')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.style.display === "block") {
+                    openDropdown.style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 
 </html>

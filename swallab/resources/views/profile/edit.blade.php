@@ -122,17 +122,21 @@
                                             value="{{ $user->email }}" readonly>
                                     </div>
                                     <div class="icon mt-2">
-                                        <i class="fa-brands fa-instagram mr-3"
-                                            onclick="openSocialModal('Instagram')"></i>
-                                        <i class="fa-brands fa-facebook mr-3" onclick="openSocialModal('Facebook')"></i>
-                                        <i class="fa-brands fa-threads mr-3" onclick="openSocialModal('Threads')"></i>
+                                        <i class="fa-brands fa-instagram mr-3" onclick="openSocialModal('Instagram')"
+                                            style="color: {{ $user->instagram ? '#E1306C' : 'gray' }};"></i>
+
+                                        <i class="fa-brands fa-facebook mr-3" onclick="openSocialModal('Facebook')"
+                                            style="color: {{ $user->facebook ? '#4267B2' : 'gray' }};"></i>
+
+                                        <i class="fa-brands fa-threads mr-3" onclick="openSocialModal('Threads')"
+                                            style="color: {{ $user->threads ? 'black' : 'gray' }};"></i>
                                     </div>
                                 </div>
                                 <div class="col-md-7 ml-5 ">
                                     <div class="form-group row">
                                         <div class="col-md-9">
-                                            <input type="text" placeholder="請輸入電話" class="form-control" id="phone"
-                                                name="phone" value="{{ $user->phone }}">
+                                            <input type="text" placeholder="請輸入電話" class="form-control"
+                                                id="phone" name="phone" value="{{ $user->phone }}">
                                         </div>
                                     </div>
 
@@ -204,7 +208,8 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         查看信用卡
                     </button>
-                    <div style="background-color:#eee9d5" class="dropdown-menu" aria-labelledby="savedCardsDropdown" id="savedCardsContainer">
+                    <div style="background-color:#eee9d5" class="dropdown-menu" aria-labelledby="savedCardsDropdown"
+                        id="savedCardsContainer">
                         <!-- 信用卡選項會動態生成 -->
                     </div>
                 </div>
